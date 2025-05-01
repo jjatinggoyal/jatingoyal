@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Github, Code, Building2, ExternalLink, Briefcase, Building, Calendar } from 'lucide-react';
+import { ArrowRight, Github, Code, Building2, ExternalLink, Briefcase } from 'lucide-react';
 
 const Portfolio: React.FC = () => {
   const portfolioRef = useRef<HTMLDivElement>(null);
@@ -73,6 +73,16 @@ const Portfolio: React.FC = () => {
           <p className="text-lg theme-text-secondary animate-on-scroll opacity-0 transition-opacity duration-700 delay-200">
             A showcase of my products, open-source contributions, and professional experience
           </p>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-4 px-4 py-2 theme-bg-tertiary hover:theme-bg-secondary rounded-lg transition-all duration-300 group"
+          >
+            <Briefcase className="h-4 w-4 theme-primary group-hover:scale-110 transition-transform" />
+            <span className="text-sm theme-text-primary">View Resume</span>
+            <ArrowRight className="h-4 w-4 theme-primary group-hover:translate-x-1 transition-transform" />
+          </a>
         </div>
 
         {/* Products Section */}
@@ -399,4 +409,4 @@ const Portfolio: React.FC = () => {
   );
 };
 
-export default Portfolio; 
+export default Portfolio;
