@@ -37,14 +37,14 @@ const About: React.FC = () => {
           </h2>
           <div className="w-20 h-1 bg-blue-600 dark:bg-blue-400 mx-auto mb-6 animate-on-scroll opacity-0 transition-opacity duration-700 delay-100"></div>
           <p className="text-lg text-slate-600 dark:text-slate-300 animate-on-scroll opacity-0 transition-opacity duration-700 delay-200">
-            Senior Software Engineer at Enphase Energy, specializing in scalable microservices and data systems.
+            Software Engineer at Enphase Energy, specializing in scalable microservices and data systems.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="animate-on-scroll opacity-0 transition-opacity duration-700 delay-300">
             <p className="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-              Hi, I'm Jatin Goyal, a Senior Software Engineer at Enphase Energy with a strong background in building scalable microservices and data systems. I graduated from the Indian Institute of Technology, Delhi with a BTech in Computer Science and Engineering.
+              Hi, I'm Jatin Goyal, a Software Engineer at Enphase Energy with a strong background in building scalable microservices and data systems. I graduated from the Indian Institute of Technology, Delhi with a BTech in Computer Science and Engineering.
             </p>
             <p className="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
               At Enphase, I've led the development of a Translation Management System for internationalization and significantly improved search functionality using Elasticsearch. I'm passionate about building efficient systems and have experience with various technologies including Ruby on Rails, Java, Python, and cloud services.

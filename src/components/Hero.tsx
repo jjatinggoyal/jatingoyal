@@ -33,7 +33,7 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
         <div className="order-2 md:order-1">
           <span className="inline-block px-3 py-1 rounded-full bg-slate-100/80 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 text-sm font-medium mb-6 animate-on-scroll opacity-0 transition-opacity duration-1000 delay-300">
-            Senior Software Engineer at Enphase Energy
+            Software Engineer at Enphase Energy
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-montserrat leading-tight text-slate-800 dark:text-white mb-6 animate-on-scroll opacity-0 transition-opacity duration-1000">
             Hi, I'm <span className="text-blue-600 dark:text-blue-400">Jatin Goyal</span>
