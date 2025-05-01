@@ -62,28 +62,28 @@ const Portfolio: React.FC = () => {
     <section 
       id="portfolio" 
       ref={portfolioRef}
-      className="py-20 bg-gradient-to-b from-white to-slate-50/95 dark:from-slate-900 dark:to-slate-900/95"
+      className="py-20 theme-bg-primary"
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-blue-600 dark:text-blue-400 mb-4 animate-on-scroll opacity-0 transition-opacity duration-700">
+          <h2 className="text-3xl md:text-4xl font-bold font-montserrat theme-primary mb-4 animate-on-scroll opacity-0 transition-opacity duration-700">
             My Portfolio
           </h2>
-          <div className="w-20 h-1 bg-orange-500 dark:bg-orange-400 mx-auto mb-6 animate-on-scroll opacity-0 transition-opacity duration-700 delay-100"></div>
-          <p className="text-lg text-slate-600 dark:text-slate-300 animate-on-scroll opacity-0 transition-opacity duration-700 delay-200">
+          <div className="w-20 h-1 theme-secondary mx-auto mb-6 animate-on-scroll opacity-0 transition-opacity duration-700 delay-100"></div>
+          <p className="text-lg theme-text-secondary animate-on-scroll opacity-0 transition-opacity duration-700 delay-200">
             A showcase of my products, open-source contributions, and professional experience
           </p>
         </div>
 
         {/* Products Section */}
         <div className="mb-20">
-          <h3 className="text-2xl font-bold font-montserrat text-slate-800 dark:text-white mb-8 flex items-center gap-2">
-            <Code className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+          <h3 className="text-2xl font-bold font-montserrat theme-text-primary mb-8 flex items-center gap-2">
+            <Code className="h-6 w-6 theme-primary" />
             Products
           </h3>
           <div className="max-w-4xl mx-auto">
             <div 
-              className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 transition-all duration-300 hover:shadow-lg animate-on-scroll opacity-0 transition-opacity duration-700 cursor-pointer"
+              className="theme-card rounded-xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-lg animate-on-scroll opacity-0 transition-opacity duration-700 cursor-pointer"
               onClick={() => setActiveProject(project)}
             >
               <div className="relative h-64 overflow-hidden">
@@ -92,22 +92,22 @@ const Portfolio: React.FC = () => {
                   alt={project.title} 
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
-                <div className="absolute top-3 right-3 bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">
+                <div className="absolute top-3 right-3 theme-primary bg-opacity-90 text-white text-xs font-medium px-2 py-1 rounded">
                   Featured
                 </div>
               </div>
               <div className="p-8">
-                <h3 className="text-2xl font-semibold text-slate-800 dark:text-white mb-4">
+                <h3 className="text-2xl font-semibold theme-text-primary mb-4">
                   {project.title}
                 </h3>
-                <p className="text-slate-600 dark:text-slate-300 mb-6 text-lg">
+                <p className="theme-text-secondary mb-6 text-lg">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.technologies.map((tech, i) => (
                     <span 
                       key={i} 
-                      className="inline-block bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-300 rounded-full px-3 py-1 text-sm"
+                      className="inline-block theme-bg-tertiary theme-text-primary rounded-full px-3 py-1 text-sm"
                     >
                       {tech}
                     </span>
@@ -115,7 +115,7 @@ const Portfolio: React.FC = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <button 
-                    className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
+                    className="theme-primary font-medium hover:underline"
                     onClick={(e) => {
                       e.stopPropagation();
                       setActiveProject(project);
@@ -127,7 +127,7 @@ const Portfolio: React.FC = () => {
                     href={project.demoLink} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center gap-x-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                    className="flex items-center gap-x-2 theme-primary"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <ExternalLink className="h-5 w-5" />
@@ -142,11 +142,11 @@ const Portfolio: React.FC = () => {
         {/* Project Detail Modal */}
         {activeProject && (
           <div 
-            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 theme-modal-overlay z-50 flex items-center justify-center p-4"
             onClick={() => setActiveProject(null)}
           >
             <div 
-              className="bg-white dark:bg-slate-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              className="theme-card rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative h-64 md:h-80">
@@ -164,7 +164,7 @@ const Portfolio: React.FC = () => {
               </div>
               <div className="p-6 md:p-8">
                 <div className="flex flex-wrap justify-between items-start mb-6">
-                  <h3 className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-white">
+                  <h3 className="text-2xl md:text-3xl font-bold theme-text-primary">
                     {activeProject.title}
                   </h3>
                   <div className="flex space-x-4 mt-2 md:mt-0">
@@ -173,7 +173,7 @@ const Portfolio: React.FC = () => {
                         href={activeProject.demoLink} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex items-center gap-x-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                        className="flex items-center gap-x-2 theme-primary"
                       >
                         <ExternalLink className="h-5 w-5" />
                         <span className="font-medium">Visit ShortsKing</span>
@@ -181,18 +181,18 @@ const Portfolio: React.FC = () => {
                     )}
                   </div>
                 </div>
-                <p className="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+                <p className="theme-text-secondary mb-6 leading-relaxed">
                   {activeProject.longDescription}
                 </p>
                 <div className="mb-6">
-                  <h4 className="text-lg font-semibold text-slate-800 dark:text-white mb-3">
+                  <h4 className="text-lg font-semibold theme-text-primary mb-3">
                     Technologies Used
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {activeProject.technologies.map((tech, i) => (
                       <span 
                         key={i} 
-                        className="inline-block bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-300 rounded-full px-3 py-1 text-sm"
+                        className="inline-block theme-bg-tertiary theme-text-primary rounded-full px-3 py-1 text-sm"
                       >
                         {tech}
                       </span>
@@ -200,19 +200,19 @@ const Portfolio: React.FC = () => {
                   </div>
                 </div>
                 <div className="mb-6">
-                  <h4 className="text-lg font-semibold text-slate-800 dark:text-white mb-3">
+                  <h4 className="text-lg font-semibold theme-text-primary mb-3">
                     Project Highlights
                   </h4>
-                  <ul className="list-disc list-inside text-slate-600 dark:text-slate-300 space-y-2">
+                  <ul className="list-disc list-inside theme-text-secondary space-y-2">
                     <li>Built a user-friendly interface for creating AI-generated videos</li>
                     <li>Implemented a robust video generation pipeline</li>
                     <li>Created a style and genre selection system for customized video creation</li>
                     <li>Developed an efficient export system for different platforms</li>
                   </ul>
                 </div>
-                <div className="pt-4 border-t border-slate-200 dark:border-slate-700 flex justify-end">
+                <div className="pt-4 theme-border flex justify-end">
                   <button 
-                    className="px-4 py-2 bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-800 dark:text-white rounded-lg transition-colors"
+                    className="px-4 py-2 theme-bg-tertiary hover:theme-bg-secondary theme-text-primary rounded-lg transition-colors"
                     onClick={() => setActiveProject(null)}
                   >
                     Close
@@ -225,8 +225,8 @@ const Portfolio: React.FC = () => {
 
         {/* Open Source Section */}
         <div className="mb-20">
-          <h3 className="text-2xl font-bold font-montserrat text-slate-800 dark:text-white mb-8 flex items-center gap-2">
-            <Github className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+          <h3 className="text-2xl font-bold font-montserrat theme-text-primary mb-8 flex items-center gap-2">
+            <Github className="h-6 w-6 theme-primary" />
             Open Source
           </h3>
           <div className="space-y-6">
@@ -295,8 +295,8 @@ const Portfolio: React.FC = () => {
 
         {/* Professional Experience Section */}
         <div>
-          <h3 className="text-2xl font-bold font-montserrat text-slate-800 dark:text-white mb-8 flex items-center gap-2">
-            <Building2 className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+          <h3 className="text-2xl font-bold font-montserrat theme-text-primary mb-8 flex items-center gap-2">
+            <Building2 className="h-6 w-6 theme-primary" />
             Professional Experience
           </h3>
           <div className="space-y-8">
