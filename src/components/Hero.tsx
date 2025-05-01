@@ -43,10 +43,10 @@ const Hero: React.FC = () => {
           </p>
           <div className="flex flex-wrap gap-4 mb-12 animate-on-scroll opacity-0 transition-opacity duration-1000 delay-300">
             <a 
-              href="#projects" 
+              href="#portfolio" 
               className="inline-flex items-center px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
             >
-              View My Work <ArrowRight className="ml-2 h-5 w-5" />
+              View My Portfolio <ArrowRight className="ml-2 h-5 w-5" />
             </a>
             <a 
               href="#contact" 

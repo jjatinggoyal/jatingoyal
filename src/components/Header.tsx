@@ -25,9 +25,7 @@ const Header: React.FC = () => {
   const navLinks = [
     { name: 'Home', href: '#hero' },
     { name: 'About', href: '#about' },
-    // { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Experience', href: '#experience' },
+    { name: 'Portfolio', href: '#portfolio' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -70,83 +68,88 @@ const Header: React.FC = () => {
         isScrolled ? 'bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm shadow-sm py-2' : 'bg-transparent py-4'
       }`}
     >
-      <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <a 
-          href="#hero" 
-          className="text-2xl font-bold font-montserrat text-blue-600 dark:text-blue-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
-        >
-          JG
-        </a>
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex justify-between items-center">
+          <a 
+            href="#hero" 
+            className="text-2xl font-bold font-montserrat text-blue-600 dark:text-blue-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
+          >
+            JG
+          </a>
 
-        <nav className="hidden md:flex items-center space-x-8">
-          <ul className="flex space-x-6">
-            {navLinks.map((link) => (
-              <li key={link.name}>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            <ul className="flex space-x-6">
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <a 
+                    href={link.href} 
+                    className="font-medium text-slate-700 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors py-2"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="flex space-x-4 border-l border-slate-200 dark:border-slate-700 pl-6">
+              {socialLinks.map((link, index) => (
                 <a 
+                  key={index} 
                   href={link.href} 
-                  className="font-medium text-slate-700 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors py-2"
+                  aria-label={link.ariaLabel}
+                  target={link.target}
+                  rel={link.rel}
+                  className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
                 >
-                  {link.name}
+                  {link.icon}
                 </a>
-              </li>
-            ))}
-          </ul>
-          <div className="flex space-x-4 border-l border-slate-200 dark:border-slate-700 pl-6">
-            {socialLinks.map((link, index) => (
-              <a 
-                key={index} 
-                href={link.href} 
-                aria-label={link.ariaLabel}
-                target={link.target}
-                rel={link.rel}
-                className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
-              >
-                {link.icon}
-              </a>
-            ))}
-          </div>
-        </nav>
+              ))}
+            </div>
+          </nav>
 
-        <button 
-          className="md:hidden text-slate-800 dark:text-white" 
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
-      </div>
-
-      {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 shadow-sm py-4 px-4">
-          <ul className="flex flex-col space-y-3">
-            {navLinks.map((link) => (
-              <li key={link.name}>
-                <a 
-                  href={link.href} 
-                  className="block py-2 font-medium text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors"
-                  onClick={toggleMenu}
-                >
-                  {link.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className="flex space-x-4 mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-            {socialLinks.map((link, index) => (
-              <a 
-                key={index} 
-                href={link.href} 
-                aria-label={link.ariaLabel}
-                target={link.target}
-                rel={link.rel}
-                className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
-              >
-                {link.icon}
-              </a>
-            ))}
-          </div>
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden text-slate-800 dark:text-white" 
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
-      )}
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 shadow-sm py-4 px-4">
+            <ul className="flex flex-col space-y-3">
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <a 
+                    href={link.href} 
+                    className="block py-2 font-medium text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors"
+                    onClick={toggleMenu}
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="flex space-x-4 mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+              {socialLinks.map((link, index) => (
+                <a 
+                  key={index} 
+                  href={link.href} 
+                  aria-label={link.ariaLabel}
+                  target={link.target}
+                  rel={link.rel}
+                  className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
+                >
+                  {link.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </header>
   );
 };
