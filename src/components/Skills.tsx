@@ -12,23 +12,23 @@ const Skills: React.FC = () => {
 
   const skills: Skill[] = [
     // Backend
-    { name: 'Ruby on Rails', level: 85, category: 'backend', color: 'bg-red-500' },
-    { name: 'Java Spring Boot', level: 75, category: 'backend', color: 'bg-green-600' },
-    { name: 'Python', level: 70, category: 'backend', color: 'bg-blue-500' },
-    { name: 'PostgreSQL', level: 80, category: 'backend', color: 'bg-indigo-600' },
-    { name: 'Node.js', level: 60, category: 'backend', color: 'bg-emerald-500' },
+    { name: 'Ruby on Rails', level: 90, category: 'backend', color: 'bg-red-500' },
+    { name: 'Java', level: 85, category: 'backend', color: 'bg-green-600' },
+    { name: 'Python', level: 85, category: 'backend', color: 'bg-blue-500' },
+    { name: 'SQL/KQL', level: 85, category: 'backend', color: 'bg-indigo-600' },
+    { name: 'FastAPI', level: 80, category: 'backend', color: 'bg-emerald-500' },
     
     // Frontend
-    { name: 'JavaScript', level: 75, category: 'frontend', color: 'bg-yellow-500' },
-    { name: 'React', level: 65, category: 'frontend', color: 'bg-cyan-500' },
-    { name: 'HTML/CSS', level: 80, category: 'frontend', color: 'bg-orange-500' },
-    { name: 'Tailwind CSS', level: 70, category: 'frontend', color: 'bg-teal-500' },
+    { name: 'JavaScript', level: 80, category: 'frontend', color: 'bg-yellow-500' },
+    { name: 'HTML/CSS', level: 75, category: 'frontend', color: 'bg-orange-500' },
+    { name: 'React', level: 70, category: 'frontend', color: 'bg-cyan-500' },
     
-    // Tools
-    { name: 'Git', level: 85, category: 'tools', color: 'bg-rose-500' },
-    { name: 'Docker', level: 70, category: 'tools', color: 'bg-blue-600' },
-    { name: 'CI/CD', level: 65, category: 'tools', color: 'bg-purple-600' },
-    { name: 'AWS', level: 60, category: 'tools', color: 'bg-amber-500' },
+    // Tools & Infrastructure
+    { name: 'AWS Cloud', level: 85, category: 'tools', color: 'bg-amber-500' },
+    { name: 'Kafka', level: 85, category: 'tools', color: 'bg-rose-500' },
+    { name: 'Docker', level: 80, category: 'tools', color: 'bg-blue-600' },
+    { name: 'Elasticsearch', level: 80, category: 'tools', color: 'bg-purple-600' },
+    { name: 'Airflow', level: 75, category: 'tools', color: 'bg-teal-500' },
   ];
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const Skills: React.FC = () => {
   return (
     <section 
       id="skills" 
-      className="py-20"
+      className="py-20 bg-white/50 dark:bg-slate-800/30"
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center mb-16">

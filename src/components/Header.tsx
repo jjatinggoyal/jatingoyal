@@ -25,28 +25,55 @@ const Header: React.FC = () => {
   const navLinks = [
     { name: 'Home', href: '#hero' },
     { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
+    // { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
     { name: 'Experience', href: '#experience' },
     { name: 'Contact', href: '#contact' },
   ];
 
   const socialLinks = [
-    { icon: <Github className="h-5 w-5" />, href: 'https://github.com/jjatinggoyal', ariaLabel: 'GitHub' },
-    { icon: <Linkedin className="h-5 w-5" />, href: 'https://linkedin.com/in/jjatinggoyal', ariaLabel: 'LinkedIn' },
-    { icon: <Mail className="h-5 w-5" />, href: 'mailto:jjatingoyal@gmail.com', ariaLabel: 'Email' },
+    { 
+      icon: <Github className="h-5 w-5" />, 
+      href: 'https://github.com/jjatinggoyal', 
+      ariaLabel: 'GitHub',
+      target: '_blank',
+      rel: 'noopener noreferrer'
+    },
+    { 
+      icon: <Linkedin className="h-5 w-5" />, 
+      href: 'https://linkedin.com/in/jjatinggoyal', 
+      ariaLabel: 'LinkedIn',
+      target: '_blank',
+      rel: 'noopener noreferrer'
+    },
+    { 
+      icon: (
+        <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      ), 
+      href: 'https://x.com/jatgoy', 
+      ariaLabel: 'X',
+      target: '_blank',
+      rel: 'noopener noreferrer'
+    },
+    { 
+      icon: <Mail className="h-5 w-5" />, 
+      href: 'mailto:jjatingoyal@gmail.com', 
+      ariaLabel: 'Email' 
+    },
   ];
 
   return (
     <header 
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-sm py-2' : 'bg-transparent py-4'
+        isScrolled ? 'bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm shadow-sm py-2' : 'bg-transparent py-4'
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
         <a 
           href="#hero" 
-          className="text-2xl font-bold font-montserrat text-slate-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+          className="text-2xl font-bold font-montserrat text-blue-600 dark:text-blue-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
         >
           JG
         </a>
@@ -57,7 +84,7 @@ const Header: React.FC = () => {
               <li key={link.name}>
                 <a 
                   href={link.href} 
-                  className="font-medium text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors py-2"
+                  className="font-medium text-slate-700 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors py-2"
                 >
                   {link.name}
                 </a>
@@ -70,6 +97,8 @@ const Header: React.FC = () => {
                 key={index} 
                 href={link.href} 
                 aria-label={link.ariaLabel}
+                target={link.target}
+                rel={link.rel}
                 className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
               >
                 {link.icon}
@@ -108,6 +137,8 @@ const Header: React.FC = () => {
                 key={index} 
                 href={link.href} 
                 aria-label={link.ariaLabel}
+                target={link.target}
+                rel={link.rel}
                 className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
               >
                 {link.icon}

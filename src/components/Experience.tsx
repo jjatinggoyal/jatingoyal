@@ -18,44 +18,30 @@ const Experience: React.FC = () => {
     {
       id: 1,
       title: 'Senior Software Engineer',
-      company: 'Tech Innovations Inc.',
-      period: 'Jan 2023 - Present',
-      description: 'Lead backend development for a financial services platform, managing a team of 3 developers.',
+      company: 'Enphase Energy',
+      period: 'July 2024 - Present',
+      description: 'Leading development of Translation Management System and search infrastructure improvements.',
       highlights: [
-        'Implemented a microservices architecture that improved system scalability by 40%',
-        'Optimized database queries, reducing response times by 60%',
-        'Led the migration from monolithic to microservices architecture',
-        'Mentored junior developers and conducted code reviews'
+        'Designed and developed a Translation Management System to centrally manage internationalization (i18n) across microservices',
+        'Enhanced search functionality for core Data entity by 95% using denormalized Elasticsearch index',
+        'Eliminated dependency on code changes for text updates and gave direct control to PMs',
+        'Implemented data synchronization with Elasticsearch using Kafka and Logstash for real-time indexing'
       ],
-      technologies: ['Ruby on Rails', 'PostgreSQL', 'Redis', 'Docker', 'Kubernetes']
+      technologies: ['Ruby on Rails', 'Elasticsearch', 'Kafka', 'MongoDB', 'RDS', 'Logstash']
     },
     {
       id: 2,
       title: 'Software Engineer',
-      company: 'Digital Solutions Ltd.',
-      period: 'Aug 2021 - Dec 2022',
-      description: 'Developed and maintained backend services for an e-commerce platform serving over 500,000 users.',
+      company: 'Enphase Energy',
+      period: 'July 2022 - June 2024',
+      description: 'Developed database abstraction layer and notification systems for the organization.',
       highlights: [
-        'Built RESTful APIs that processed 1M+ daily requests',
-        'Implemented robust error handling and monitoring systems',
-        'Collaborated with frontend team to integrate new features',
-        'Participated in Agile development process'
+        'Designed and implemented a DB abstraction layer to serve DB needs across the organization',
+        'Created predefined API interfaces and exposed important events through Kafka',
+        'Implemented wrapper on Active Record ORM for DB operations via API calls',
+        'Delivered Notification Digest feature with data aggregation pipeline using SQS'
       ],
-      technologies: ['Java', 'Spring Boot', 'MySQL', 'RabbitMQ', 'JUnit']
-    },
-    {
-      id: 3,
-      title: 'Junior Developer',
-      company: 'Web Creators Co.',
-      period: 'Feb 2021 - Jul 2021',
-      description: 'Assisted in developing web applications for various clients across different industries.',
-      highlights: [
-        'Contributed to frontend development using modern JavaScript frameworks',
-        'Fixed bugs and implemented minor features',
-        'Participated in daily stand-ups and sprint planning',
-        'Learned industry best practices and standards'
-      ],
-      technologies: ['Python', 'Django', 'JavaScript', 'HTML/CSS', 'Git']
+      technologies: ['Ruby on Rails', 'Active Record', 'Kafka', 'AWS SQS', 'API Development']
     }
   ];
 
@@ -80,7 +66,7 @@ const Experience: React.FC = () => {
   }, []);
 
   return (
-    <section id="experience" ref={experienceRef} className="py-20">
+    <section id="experience" ref={experienceRef} className="py-20 bg-slate-50/50 dark:bg-slate-800/30">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-slate-800 dark:text-white mb-4 animate-on-scroll opacity-0 transition-opacity duration-700">

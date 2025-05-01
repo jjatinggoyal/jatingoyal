@@ -20,14 +20,33 @@ const Projects: React.FC = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: 'ShortsKing',
-      description: 'A web application that allows content creators to automate short-form video content',
-      longDescription: 'ShortsKing is a web application that allows content creators to automate short-form video content. The app is written in full-stack vanilla JavaScript and uses AI to generate video content based on text inputs. Users can create short videos based on text inputs in their desired style and genres.',
-      image: 'https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      technologies: ['JavaScript', 'Node.js', 'Express', 'MongoDB', 'AI Integration'],
-      demoLink: 'https://shortsking.example.com',
-      repoLink: 'https://github.com/jatingoyal/shortsking',
+      title: 'Content Automation Platform - ShortsKing.com',
+      description: 'A fully automated short video content creation platform with minimal user input.',
+      longDescription: 'Developed and launched a fully automated short video content creation platform requiring minimal user input (title, visual style, voice). The platform organically attracted over 500 real users. Independently managed the complete lifecycle of the Ruby on Rails full-stack application, including design, development (frontend/backend), deployment, integrations, and marketing. Leveraged open-source LLMs and ffmpeg for content generation and processing.',
+      image: '/images/shortsking.png',
+      technologies: ['Ruby on Rails', 'LLMs', 'ffmpeg', 'AWS', 'React', 'PostgreSQL'],
+      demoLink: 'https://shortsking.com',
       featured: true
+    },
+    {
+      id: 2,
+      title: 'Pay gem - Ruby on Rails Payment Integration',
+      description: 'Enhanced subscription management API and fixed critical customer creation bug.',
+      longDescription: 'Enhanced subscription management API with a patch for greater business flexibility in payment handling and resolved a critical create customer API bug that prevented payment provider data population in the app\'s database.',
+      image: '/images/paygem.jpg',
+      technologies: ['Ruby on Rails', 'API Development', 'Payment Integration'],
+      repoLink: 'https://github.com/search?q=is%3Apr%20author%3Ajjatinggoyal%20archived%3Afalse%20repo%3Apay-rails%2Fpay%20&type=pullrequests',
+      featured: false
+    },
+    {
+      id: 3,
+      title: 'Ruby on Rails Framework Contribution',
+      description: 'Updated default configurations for greenfield Rails applications.',
+      longDescription: 'Contributed to the Ruby on Rails framework by updating default configurations for greenfield rails apps created using the rails CLI. This improvement helps developers get started with better default settings.',
+      image: '/images/rails.jpg',
+      technologies: ['Ruby on Rails', 'Open Source'],
+      repoLink: 'https://github.com/search?q=is%3Apr%20author%3Ajjatinggoyal%20archived%3Afalse%20repo%3Arails%2Frails%20&type=pullrequests',
+      featured: false
     }
   ];
 
@@ -52,7 +71,7 @@ const Projects: React.FC = () => {
   }, []);
 
   return (
-    <section id="projects" ref={projectsRef} className="py-20 bg-white dark:bg-slate-800/50">
+    <section id="projects" ref={projectsRef} className="py-20 bg-slate-50/50 dark:bg-slate-800/30">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-slate-800 dark:text-white mb-4 animate-on-scroll opacity-0 transition-opacity duration-700">
@@ -186,7 +205,7 @@ const Projects: React.FC = () => {
                         className="flex items-center gap-x-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
                       >
                         <ExternalLink className="h-5 w-5" />
-                        <span className="font-medium">Live Demo</span>
+                        <span className="font-medium">Visit ShortsKing</span>
                       </a>
                     )}
                   </div>

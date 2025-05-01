@@ -25,7 +25,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-slate-900">
       <Header />
       <div className="fixed bottom-6 right-6 z-50">
         <ThemeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
@@ -33,7 +33,7 @@ function App() {
       <main className="flex-grow">
         <Hero />
         <About />
-        <Skills />
+        {/* <Skills /> */}
         <Projects />
         <Experience />
         <Contact />
