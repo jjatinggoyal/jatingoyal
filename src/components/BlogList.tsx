@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { BlogPost, getBlogPosts, formatDate } from '../utils/blogUtils';
 
 const POSTS_PER_PAGE = 6;
@@ -54,6 +55,22 @@ const BlogList: React.FC = () => {
 
   return (
     <section className="py-20 theme-bg-primary">
+      <Helmet>
+        <title>Blog | Jatin Goyal</title>
+        
+        <meta name="description" content="Read my latest thoughts." />
+        <meta property="og:title" content="Blog | Jatin Goyal" />
+        <meta property="og:description" content="Read my latest thoughts." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://jatingoyal.com/blog" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://jatingoyal.com/blog" />
+        <meta property="twitter:title" content="Blog | Jatin Goyal" />
+        <meta property="twitter:description" content="Read my latest thoughts." />
+
+        <link rel="canonical" href="https://jatingoyal.com/blog" />
+      </Helmet>
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold font-montserrat theme-text-primary mb-12">Blog Posts</h1>

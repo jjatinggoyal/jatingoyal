@@ -7,6 +7,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
+import { Helmet } from 'react-helmet-async';
 import { BlogPost as BlogPostType, getBlogPosts, formatDate } from '../utils/blogUtils';
 import Alert from './markdown/Alert';
 import CodeDemo from './markdown/CodeDemo';
@@ -155,100 +156,122 @@ const BlogPost: React.FC = () => {
     );
   }
 
+  const blogImage = post.frontmatter.coverImage ? getOptimizedImagePath(post.frontmatter.coverImage) : '';
+  const canonicalUrl = `https://jatingoyal.dev/blog/${post.slug}`;
+
   return (
-    <article className="py-20 theme-bg-primary">
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto">
-          {post.frontmatter.coverImage && (
-            <div className="relative h-[400px] rounded-xl overflow-hidden mb-8">
-              <img 
-                src={post.frontmatter.coverImage}
-                alt={post.frontmatter.title}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
+    <>
+      <Helmet>
+        <title>{post.frontmatter.title} | Jatin Goyal</title>
+        
+        <meta name="description" content={post.frontmatter.subtitle || `Read ${post.frontmatter.title} on Jatin Goyal's blog`} />
+        <meta property="og:title" content={`${post.frontmatter.title} | Jatin Goyal`} />
+        <meta property="og:description" content={post.frontmatter.subtitle || `Read ${post.frontmatter.title} on Jatin Goyal's blog`} />
+        <meta property="og:url" content={canonicalUrl} />
+        {blogImage && <meta property="og:image" content={blogImage} />}
 
-          <header className="mb-12">
-            <h1 className="text-4xl font-bold font-montserrat theme-text-primary mb-4">
-              {post.frontmatter.title}
-            </h1>
-            {post.frontmatter.subtitle && (
-              <p className="text-xl theme-text-secondary mb-6">{post.frontmatter.subtitle}</p>
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${post.frontmatter.title} | Jatin Goyal`} />
+        <meta name="twitter:description" content={post.frontmatter.subtitle || `Read ${post.frontmatter.title} on Jatin Goyal's blog`} />
+        {blogImage && <meta name="twitter:image" content={blogImage} />}
+
+        <link rel="canonical" href={canonicalUrl} />
+      </Helmet>
+      <article className="py-20 theme-bg-primary">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            {post.frontmatter.coverImage && (
+              <div className="relative h-[400px] rounded-xl overflow-hidden mb-8">
+                <img 
+                  src={post.frontmatter.coverImage}
+                  alt={post.frontmatter.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             )}
-            <div className="flex items-center gap-4">
-              <time className="theme-text-tertiary">
-                {formatDate(post.frontmatter.date)}
-              </time>
-              {post.frontmatter.tags && (
-                <div className="flex gap-2">
-                  {post.frontmatter.tags.map(tag => (
-                    <span 
-                      key={tag}
-                      className="px-3 py-1 text-sm rounded-full theme-bg-tertiary theme-text-primary"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+
+            <header className="mb-12">
+              <h1 className="text-4xl font-bold font-montserrat theme-text-primary mb-4">
+                {post.frontmatter.title}
+              </h1>
+              {post.frontmatter.subtitle && (
+                <p className="text-xl theme-text-secondary mb-6">{post.frontmatter.subtitle}</p>
               )}
+              <div className="flex items-center gap-4">
+                <time className="theme-text-tertiary">
+                  {formatDate(post.frontmatter.date)}
+                </time>
+                {post.frontmatter.tags && (
+                  <div className="flex gap-2">
+                    {post.frontmatter.tags.map(tag => (
+                      <span 
+                        key={tag}
+                        className="px-3 py-1 text-sm rounded-full theme-bg-tertiary theme-text-primary"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </header>
+
+            <div className="prose prose-lg dark:prose-invert max-w-none">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm, remarkMath]}
+                rehypePlugins={[rehypeRaw, rehypeHighlight, rehypeKatex]}
+                components={components}
+              >
+                {post.content}
+              </ReactMarkdown>
             </div>
-          </header>
 
-          <div className="prose prose-lg dark:prose-invert max-w-none">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm, remarkMath]}
-              rehypePlugins={[rehypeRaw, rehypeHighlight, rehypeKatex]}
-              components={components}
-            >
-              {post.content}
-            </ReactMarkdown>
-          </div>
+            <div className="mt-12 pt-8 border-t theme-border">
+              <div className="flex justify-between items-center">
+                {adjacentPosts.previous ? (
+                  <Link 
+                    to={`/blog/${adjacentPosts.previous.slug}`}
+                    className="flex items-center theme-text-primary hover:theme-primary transition-colors"
+                  >
+                    <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                    <span>{truncateTitle(adjacentPosts.previous.frontmatter.title)}</span>
+                  </Link>
+                ) : (
+                  <div></div>
+                )}
 
-          <div className="mt-12 pt-8 border-t theme-border">
-            <div className="flex justify-between items-center">
-              {adjacentPosts.previous ? (
-                <Link 
-                  to={`/blog/${adjacentPosts.previous.slug}`}
-                  className="flex items-center theme-text-primary hover:theme-primary transition-colors"
-                >
-                  <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                  <span>{truncateTitle(adjacentPosts.previous.frontmatter.title)}</span>
-                </Link>
-              ) : (
-                <div></div>
-              )}
+                {/* Show "All Posts" link only for first and last posts */}
+                {(!adjacentPosts.previous || !adjacentPosts.next) && (
+                  <Link 
+                    to="/blog"
+                    className="mx-4 theme-text-primary hover:theme-primary transition-colors"
+                  >
+                    All Posts
+                  </Link>
+                )}
 
-              {/* Show "All Posts" link only for first and last posts */}
-              {(!adjacentPosts.previous || !adjacentPosts.next) && (
-                <Link 
-                  to="/blog"
-                  className="mx-4 theme-text-primary hover:theme-primary transition-colors"
-                >
-                  All Posts
-                </Link>
-              )}
-
-              {adjacentPosts.next ? (
-                <Link 
-                  to={`/blog/${adjacentPosts.next.slug}`}
-                  className="flex items-center theme-text-primary hover:theme-primary transition-colors"
-                >
-                  <span>{truncateTitle(adjacentPosts.next.frontmatter.title)}</span>
-                  <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              ) : (
-                <div></div>
-              )}
+                {adjacentPosts.next ? (
+                  <Link 
+                    to={`/blog/${adjacentPosts.next.slug}`}
+                    className="flex items-center theme-text-primary hover:theme-primary transition-colors"
+                  >
+                    <span>{truncateTitle(adjacentPosts.next.frontmatter.title)}</span>
+                    <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                ) : (
+                  <div></div>
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </>
   );
 };
 
