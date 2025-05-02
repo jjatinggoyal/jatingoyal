@@ -301,6 +301,18 @@ const Portfolio: React.FC = () => {
               </div>
             </div>
           </div>
+          <div className="mt-8 text-center">
+            <a
+              href="https://github.com/search?q=is%3Apr+author%3Ajjatinggoyal+archived%3Afalse&type=pullrequests"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 theme-bg-tertiary hover:theme-bg-secondary rounded-lg transition-all duration-300 group"
+            >
+              <Github className="h-4 w-4 theme-primary group-hover:scale-110 transition-transform" />
+              <span className="text-sm theme-text-primary">View All Contributions</span>
+              <ArrowRight className="h-4 w-4 theme-primary group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
         </div>
 
         {/* Professional Experience Section */}
