@@ -40,16 +40,30 @@ const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<BlogPostType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [adjacentPosts, setAdjacentPosts] = useState<{ previous: BlogPostType | null; next: BlogPostType | null }>({
+    previous: null,
+    next: null
+  });
 
   useEffect(() => {
     const loadPost = async () => {
       const posts = await getBlogPosts();
       const currentPost = posts.find(p => p.slug === slug);
+      const currentIndex = posts.findIndex(p => p.slug === slug);
+      
       setPost(currentPost || null);
+      setAdjacentPosts({
+        previous: currentIndex > 0 ? posts[currentIndex - 1] : null,
+        next: currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null
+      });
       setIsLoading(false);
     };
     loadPost();
   }, [slug]);
+
+  const truncateTitle = (title: string, maxLength: number = 30) => {
+    return title.length > maxLength ? `${title.substring(0, maxLength)}...` : title;
+  };
 
   const components: Partial<Components> & {
     Alert: typeof Alert;
@@ -192,15 +206,45 @@ const BlogPost: React.FC = () => {
           </div>
 
           <div className="mt-12 pt-8 border-t theme-border">
-            <Link 
-              to="/blog"
-              className="inline-flex items-center theme-text-primary hover:theme-primary transition-colors"
-            >
-              <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Back to Blog
-            </Link>
+            <div className="flex justify-between items-center">
+              {adjacentPosts.previous ? (
+                <Link 
+                  to={`/blog/${adjacentPosts.previous.slug}`}
+                  className="flex items-center theme-text-primary hover:theme-primary transition-colors"
+                >
+                  <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                  <span>{truncateTitle(adjacentPosts.previous.frontmatter.title)}</span>
+                </Link>
+              ) : (
+                <div></div>
+              )}
+
+              {/* Show "All Posts" link only for first and last posts */}
+              {(!adjacentPosts.previous || !adjacentPosts.next) && (
+                <Link 
+                  to="/blog"
+                  className="mx-4 theme-text-primary hover:theme-primary transition-colors"
+                >
+                  All Posts
+                </Link>
+              )}
+
+              {adjacentPosts.next ? (
+                <Link 
+                  to={`/blog/${adjacentPosts.next.slug}`}
+                  className="flex items-center theme-text-primary hover:theme-primary transition-colors"
+                >
+                  <span>{truncateTitle(adjacentPosts.next.frontmatter.title)}</span>
+                  <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              ) : (
+                <div></div>
+              )}
+            </div>
           </div>
         </div>
       </div>

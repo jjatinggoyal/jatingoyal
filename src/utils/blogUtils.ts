@@ -75,3 +75,72 @@ export function formatDate(date: string): string {
     day: 'numeric',
   });
 }
+
+export interface SearchResult {
+  title: string;
+  subtitle?: string;
+  slug: string;
+  preview: string;
+  date: string;
+  tags?: string[];
+}
+
+export async function searchBlogPosts(query: string): Promise<SearchResult[]> {
+  const posts = await getBlogPosts();
+  const searchTerm = query.toLowerCase();
+  
+  return posts
+    .filter(post => {
+      const titleMatch = post.frontmatter.title.toLowerCase().includes(searchTerm);
+      const subtitleMatch = post.frontmatter.subtitle?.toLowerCase().includes(searchTerm);
+      const contentMatch = post.content.toLowerCase().includes(searchTerm);
+      const tagsMatch = post.frontmatter.tags?.some(tag => 
+        tag.toLowerCase().includes(searchTerm)
+      );
+      
+      return titleMatch || subtitleMatch || contentMatch || tagsMatch;
+    })
+    .map(post => {
+      let preview = '';
+      const content = post.content.toLowerCase();
+      const searchIndex = content.indexOf(searchTerm);
+      
+      // If found in content, show context around the match
+      if (searchIndex !== -1) {
+        const contextStart = Math.max(0, searchIndex - 75);
+        const contextEnd = Math.min(post.content.length, searchIndex + searchTerm.length + 75);
+        preview = post.content.slice(contextStart, contextEnd);
+        
+        // Add ellipsis if we're not at the start/end
+        if (contextStart > 0) preview = '...' + preview;
+        if (contextEnd < post.content.length) preview = preview + '...';
+      } else {
+        // Fallback to first 150 chars if match is in title/subtitle/tags
+        preview = post.content.slice(0, 150) + '...';
+      }
+
+      return {
+        title: post.frontmatter.title,
+        subtitle: post.frontmatter.subtitle,
+        slug: post.slug,
+        preview,
+        date: post.frontmatter.date,
+        tags: post.frontmatter.tags
+      };
+    });
+}
+
+export interface AdjacentPosts {
+  previous: BlogPost | null;
+  next: BlogPost | null;
+}
+
+export async function getAdjacentPosts(currentSlug: string): Promise<AdjacentPosts> {
+  const posts = await getBlogPosts();
+  const currentIndex = posts.findIndex(post => post.slug === currentSlug);
+  
+  return {
+    previous: currentIndex > 0 ? posts[currentIndex - 1] : null,
+    next: currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null
+  };
+}

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Menu, X, Github, Linkedin, Mail, Search as SearchIcon } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
+import Search from './Search';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +25,10 @@ const Header: React.FC = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const isActive = (path: string) => {
+    return location.pathname === path;
   };
 
   const navLinks = [
@@ -119,14 +127,23 @@ const Header: React.FC = () => {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-slate-800 dark:text-white" 
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setIsSearchOpen(true)}
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
+              aria-label="Search"
+            >
+              <SearchIcon className="h-5 w-5 theme-text-primary" />
+            </button>
+            {/* <ThemeToggle /> */}
+            <button 
+              className="md:hidden text-slate-800 dark:text-white" 
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -172,6 +189,9 @@ const Header: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Search Modal */}
+      <Search isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </header>
   );
 };

@@ -60,52 +60,54 @@ const BlogList: React.FC = () => {
           
           <div className="grid gap-8 md:grid-cols-2">
             {paginatedPosts.map((post) => (
-              <article 
+              <Link 
                 key={post.slug}
-                className="theme-card rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
+                to={`/blog/${post.slug}`}
+                className="block"
               >
-                {post.frontmatter.coverImage && (
-                  <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={post.frontmatter.coverImage}
-                      alt={post.frontmatter.title}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                    />
-                  </div>
-                )}
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <time className="text-sm theme-text-tertiary">
-                      {formatDate(post.frontmatter.date)}
-                    </time>
-                    {post.frontmatter.tags && post.frontmatter.tags.map(tag => (
-                      <span 
-                        key={tag}
-                        className="inline-block px-2 py-1 text-xs rounded-full theme-bg-tertiary theme-text-primary"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <h2 className="text-xl font-bold theme-text-primary mb-2">
-                    <Link to={`/blog/${post.slug}`} className="hover:theme-primary transition-colors">
-                      {post.frontmatter.title}
-                    </Link>
-                  </h2>
-                  {post.frontmatter.subtitle && (
-                    <p className="theme-text-secondary mb-4">{post.frontmatter.subtitle}</p>
+                <article 
+                  className="theme-card rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
+                >
+                  {post.frontmatter.coverImage && (
+                    <div className="relative h-48 overflow-hidden">
+                      <img 
+                        src={post.frontmatter.coverImage}
+                        alt={post.frontmatter.title}
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                      />
+                    </div>
                   )}
-                  <Link 
-                    to={`/blog/${post.slug}`}
-                    className="inline-flex items-center theme-primary hover:opacity-80 transition-opacity"
-                  >
-                    Read More
-                    <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </div>
-              </article>
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 mb-3">
+                      <time className="text-sm theme-text-tertiary">
+                        {formatDate(post.frontmatter.date)}
+                      </time>
+                      {post.frontmatter.tags && post.frontmatter.tags.map(tag => (
+                        <span 
+                          key={tag}
+                          className="inline-block px-2 py-1 text-xs rounded-full theme-bg-tertiary theme-text-primary"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <h2 className="text-xl font-bold theme-text-primary mb-2">
+                      {post.frontmatter.title}
+                    </h2>
+                    {post.frontmatter.subtitle && (
+                      <p className="theme-text-secondary mb-4">{post.frontmatter.subtitle}</p>
+                    )}
+                    <span 
+                      className="inline-flex items-center theme-primary hover:opacity-80 transition-opacity"
+                    >
+                      Read More
+                      <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
 
