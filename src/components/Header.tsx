@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,10 +24,10 @@ const Header: React.FC = () => {
   };
 
   const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'About', href: '#about' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'About', href: '/#about', isHash: true },
+    { name: 'Portfolio', href: '/#portfolio', isHash: true },
+    { name: 'Blog', href: '/blog', isHash: false },
+    { name: 'Contact', href: '/#contact', isHash: true },
   ];
 
   const socialLinks = [
@@ -70,42 +71,53 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
-          <a 
-            href="#" 
+          <Link 
+            to="/"
             className="text-2xl font-bold font-montserrat text-blue-600 dark:text-blue-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
           >
             JG
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <ul className="flex space-x-6">
-              {navLinks.map((link) => (
-                <li key={link.name}>
+          <div className="hidden md:flex items-center space-x-8">
+            <nav className="flex items-center space-x-8">
+              {navLinks.map(link => (
+                link.isHash ? (
                   <a 
-                    href={link.href} 
-                    className="font-medium text-slate-700 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors py-2"
+                    key={link.name}
+                    href={link.href}
+                    className="theme-text-primary hover:theme-primary transition-colors"
                   >
                     {link.name}
                   </a>
-                </li>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="theme-text-primary hover:theme-primary transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
-            </ul>
-            <div className="flex space-x-4 border-l border-slate-200 dark:border-slate-700 pl-6">
-              {socialLinks.map((link, index) => (
-                <a 
-                  key={index} 
-                  href={link.href} 
+            </nav>
+
+            {/* Desktop Social Links */}
+            <div className="flex items-center gap-4 border-l theme-border pl-8">
+              {socialLinks.map(link => (
+                <a
+                  key={link.href}
+                  href={link.href}
                   aria-label={link.ariaLabel}
                   target={link.target}
                   rel={link.rel}
-                  className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
+                  className="theme-text-primary hover:theme-primary transition-colors"
                 >
                   {link.icon}
                 </a>
               ))}
             </div>
-          </nav>
+          </div>
 
           {/* Mobile Menu Button */}
           <button 
@@ -119,34 +131,44 @@ const Header: React.FC = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 shadow-sm py-4 px-4">
-            <ul className="flex flex-col space-y-3">
-              {navLinks.map((link) => (
-                <li key={link.name}>
+          <div className="md:hidden absolute top-full left-0 right-0 theme-bg-primary py-4 px-6 border-t theme-border">
+            <nav className="flex flex-col space-y-4">
+              {navLinks.map(link => (
+                link.isHash ? (
                   <a 
-                    href={link.href} 
-                    className="block py-2 font-medium text-slate-600 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors"
+                    key={link.name}
+                    href={link.href}
+                    className="theme-text-primary hover:theme-primary transition-colors"
                     onClick={toggleMenu}
                   >
                     {link.name}
                   </a>
-                </li>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="theme-text-primary hover:theme-primary transition-colors"
+                    onClick={toggleMenu}
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
-            </ul>
-            <div className="flex space-x-4 mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-              {socialLinks.map((link, index) => (
-                <a 
-                  key={index} 
-                  href={link.href} 
-                  aria-label={link.ariaLabel}
-                  target={link.target}
-                  rel={link.rel}
-                  className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
-                >
-                  {link.icon}
-                </a>
-              ))}
-            </div>
+              <div className="flex items-center gap-4 pt-4 border-t theme-border">
+                {socialLinks.map(link => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    aria-label={link.ariaLabel}
+                    target={link.target}
+                    rel={link.rel}
+                    className="theme-text-primary hover:theme-primary transition-colors"
+                  >
+                    {link.icon}
+                  </a>
+                ))}
+              </div>
+            </nav>
           </div>
         )}
       </div>

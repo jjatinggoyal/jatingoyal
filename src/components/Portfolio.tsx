@@ -53,7 +53,7 @@ const Portfolio: React.FC = () => {
     title: 'Content Automation Platform - ShortsKing.com',
     description: 'A fully automated short video content creation platform with minimal user input.',
     longDescription: 'Developed and launched a fully automated short video content creation platform requiring minimal user input (title, visual style, voice). The platform organically attracted over 500 real users. Independently managed the complete lifecycle of the Ruby on Rails full-stack application, including design, development (frontend/backend), deployment, integrations, and marketing. Leveraged open-source LLMs and ffmpeg for content generation and processing.',
-    image: '/images/shortsking.png',
+    image: '/images/shortsking.webp',
     technologies: ['Ruby on Rails', 'LLMs', 'ffmpeg', 'AWS', 'React', 'PostgreSQL'],
     demoLink: 'https://shortsking.com'
   };
