@@ -1,22 +1,21 @@
-import { Inter, Montserrat, Source_Sans_3 } from 'next/font/google';
+import { Montserrat, Source_Sans_3 } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 import Script from 'next/script';
 
-const inter = Inter({ subsets: ['latin'] });
-const montserrat = Montserrat({ 
+const montserrat = Montserrat({
   subsets: ['latin'],
-  variable: '--font-montserrat'
+  variable: '--font-montserrat',
 });
+
 const sourceSans = Source_Sans_3({
   subsets: ['latin'],
   variable: '--font-source-sans',
-  weight: ['300', '400', '600']
 });
 
 export const metadata = {
-  title: 'Jatin Goyal',
-  description: 'Portfolio website of Jatin Goyal, a Software Engineer specializing in Ruby, Java, Python, and cloud technologies.',
+  title: 'Jatin Goyal - Software Engineer',
+  description: 'Personal portfolio and blog of Jatin Goyal, a software engineer specializing in web development and distributed systems.',
   metadataBase: new URL('https://jatingoyal.com'),
   openGraph: {
     title: 'Jatin Goyal',
@@ -82,9 +81,7 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning className="antialiased bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300">
         <Providers>
-          <div className={inter.className}>
-            {children}
-          </div>
+          {children}
         </Providers>
       </body>
     </html>
