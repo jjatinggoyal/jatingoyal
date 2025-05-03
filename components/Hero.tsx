@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { ArrowRight, Github, Coffee, Code } from 'lucide-react';
+import Image from 'next/image';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -38,7 +39,7 @@ const Hero: React.FC = () => {
             Software Engineer at Enphase Energy
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-montserrat leading-tight text-slate-800 dark:text-white mb-6 animate-on-scroll opacity-0 transition-opacity duration-1000">
-            Hi, I'm <span className="text-blue-600 dark:text-blue-400">Jatin Goyal</span>
+            Hi, I&apos;m <span className="text-blue-600 dark:text-blue-400">Jatin Goyal</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-lg animate-on-scroll opacity-0 transition-opacity duration-1000 delay-150">
             Full-stack engineer specializing in building scalable microservices and data systems. Experienced with Ruby on Rails, Java, and Python. Open-source contributor to Ruby on Rails ecosystem.
@@ -78,10 +79,13 @@ const Hero: React.FC = () => {
         
         <div className="relative order-1 md:order-2 animate-on-scroll opacity-0 transition-opacity duration-1000 delay-300">
           <div className="relative w-48 h-48 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto rounded-2xl overflow-hidden bg-slate-100/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
-            <img
+            <Image
               src="/images/profile.jpg"
               alt="Jatin Goyal"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 192px, (max-width: 1024px) 320px, 384px"
+              priority
             />
           </div>
         </div>

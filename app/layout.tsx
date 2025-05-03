@@ -1,9 +1,18 @@
-import { Inter } from 'next/font/google';
+import { Inter, Montserrat, Source_Sans_3 } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
+const montserrat = Montserrat({ 
+  subsets: ['latin'],
+  variable: '--font-montserrat'
+});
+const sourceSans = Source_Sans_3({
+  subsets: ['latin'],
+  variable: '--font-source-sans',
+  weight: ['300', '400', '600']
+});
 
 export const metadata = {
   title: 'Jatin Goyal',
@@ -42,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+    <html lang="en" suppressHydrationWarning className={`${montserrat.variable} ${sourceSans.variable} scroll-smooth`}>
       <head>
         <link
           rel="preconnect"

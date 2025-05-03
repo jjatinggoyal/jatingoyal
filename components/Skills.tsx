@@ -1,4 +1,7 @@
+'use client';
+
 import React, { useEffect, useRef } from 'react';
+import { Code, Database, Cloud, Cpu } from 'lucide-react';
 
 interface Skill {
   name: string;
@@ -36,25 +39,22 @@ const Skills: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const bars = entry.target.querySelectorAll('.skill-bar');
-            bars.forEach((bar, index) => {
-              setTimeout(() => {
-                (bar as HTMLElement).style.width = `${(bar as HTMLElement).dataset.level}%`;
-              }, index * 100);
-            });
+            entry.target.classList.add('animate-fade-in');
           }
         });
       },
       { threshold: 0.1 }
     );
     
-    if (skillsRef.current) {
-      observer.observe(skillsRef.current);
-    }
+    // Store ref value in a variable to use in cleanup
+    const currentRef = skillsRef.current;
+    const elements = currentRef?.querySelectorAll('.animate-on-scroll');
+    elements?.forEach((el) => observer.observe(el));
     
     return () => {
-      if (skillsRef.current) {
-        observer.unobserve(skillsRef.current);
+      if (currentRef) {
+        const elements = currentRef.querySelectorAll('.animate-on-scroll');
+        elements?.forEach((el) => observer.unobserve(el));
       }
     };
   }, []);
@@ -66,20 +66,20 @@ const Skills: React.FC = () => {
   return (
     <section 
       id="skills" 
-      className="py-20 bg-white/50 dark:bg-slate-800/30"
+      ref={skillsRef}
+      className="py-20 bg-white dark:bg-slate-900"
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-slate-800 dark:text-white mb-4">
             Technical Skills
           </h2>
-          <div className="w-20 h-1 bg-blue-600 dark:bg-blue-400 mx-auto mb-6"></div>
           <p className="text-lg text-slate-600 dark:text-slate-300">
-            The technologies and tools I've mastered throughout my journey.
+            Here&apos;s what I&apos;m good at
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8" ref={skillsRef}>
+        <div className="grid md:grid-cols-3 gap-8">
           <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
             <h3 className="text-xl font-semibold text-slate-800 dark:text-white mb-6 text-center">
               Backend Development

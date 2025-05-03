@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Github, Code, Building2, ExternalLink, Briefcase } from 'lucide-react';
+import Image from 'next/image';
 
 const Portfolio: React.FC = () => {
   const portfolioRef = useRef<HTMLDivElement>(null);
@@ -54,7 +55,7 @@ const Portfolio: React.FC = () => {
   const project = {
     title: 'Content Automation Platform - ShortsKing.com',
     description: 'A fully automated short video content creation platform with minimal user input.',
-    longDescription: 'Developed and launched a fully automated short video content creation platform requiring minimal user input (title, visual style, voice). The platform organically attracted over 500 real users. Independently managed the complete lifecycle of the Ruby on Rails full-stack application, including design, development (frontend/backend), deployment, integrations, and marketing. Leveraged open-source LLMs and ffmpeg for content generation and processing.',
+    longDescription: "Developed and launched a fully automated short video content creation platform requiring minimal user input (title, visual style, voice). The platform organically attracted over 500 real users. Independently managed the complete lifecycle of the Ruby on Rails full-stack application, including design, development (frontend/backend), deployment, integrations, and marketing. Leveraged open-source LLMs and ffmpeg for content generation and processing.",
     image: '/images/shortsking.png',
     technologies: ['Ruby on Rails', 'LLMs', 'ffmpeg', 'AWS', 'React', 'PostgreSQL'],
     demoLink: 'https://shortsking.com'
@@ -99,10 +100,12 @@ const Portfolio: React.FC = () => {
               onClick={() => setActiveProject(project)}
             >
               <div className="relative h-64 overflow-hidden">
-                <img 
+                <Image 
                   src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  alt={project.title}
+                  fill
+                  className="object-cover transition-transform duration-500 hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute top-3 right-3 theme-primary bg-opacity-90 text-white text-xs font-medium px-2 py-1 rounded">
                   Featured
@@ -162,10 +165,12 @@ const Portfolio: React.FC = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative h-64 md:h-80">
-                <img 
+                <Image 
                   src={activeProject.image} 
-                  alt={activeProject.title} 
-                  className="w-full h-full object-cover"
+                  alt={activeProject.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <button 
                   className="absolute top-4 right-4 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-black/70 transition-colors"
@@ -262,7 +267,7 @@ const Portfolio: React.FC = () => {
                     </a>
                   </div>
                   <p className="text-slate-600 dark:text-slate-300 mb-4">
-                    Enhanced subscription management API with a patch for greater business flexibility in payment handling and resolved a critical create customer API bug that prevented payment provider data population in the app's database.
+                    Enhanced subscription management API with a patch for greater business flexibility in payment handling and resolved a critical create customer API bug that prevented payment provider data population in the app&apos;s database.
                   </p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     <span className="px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm">Ruby on Rails</span>

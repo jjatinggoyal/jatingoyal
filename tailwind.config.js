@@ -9,8 +9,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        montserrat: ['Montserrat', 'sans-serif'],
-        'source-sans': ['Source Sans 3', 'sans-serif'],
+        montserrat: ['var(--font-montserrat)', 'sans-serif'],
+        'source-sans': ['var(--font-source-sans)', 'sans-serif'],
       },
     },
   },

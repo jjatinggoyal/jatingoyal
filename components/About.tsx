@@ -46,13 +46,13 @@ const About: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="animate-on-scroll opacity-0 transition-opacity duration-700 delay-300">
             <p className="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-              Hi, I'm Jatin Goyal, a Software Engineer at Enphase Energy with a strong background in building scalable microservices and data systems. I graduated from the Indian Institute of Technology, Delhi with a BTech in Computer Science and Engineering.
+              Hi, I&apos;m Jatin Goyal, a Software Engineer at Enphase Energy with a strong background in building scalable microservices and data systems. I graduated from the Indian Institute of Technology, Delhi with a BTech in Computer Science and Engineering.
             </p>
             <p className="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-              At Enphase, I've led the development of a Translation Management System for internationalization and significantly improved search functionality using Elasticsearch. I'm passionate about building efficient systems and have experience with various technologies including Ruby on Rails, Java, Python, and cloud services.
+              At Enphase, I&apos;ve led the development of a Translation Management System for internationalization and significantly improved search functionality using Elasticsearch. I&apos;m passionate about building efficient systems and have experience with various technologies including Ruby on Rails, Java, Python, and cloud services.
             </p>
             <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-              I'm also an active contributor to the Ruby on Rails ecosystem and have developed ShortsKing.com, a content automation platform that has attracted over 500 real users. I enjoy tackling complex technical challenges and creating solutions that make a real impact.
+              I&apos;m also an active contributor to the Ruby on Rails ecosystem and have developed ShortsKing.com, a content automation platform that has attracted over 500 real users. I enjoy tackling complex technical challenges and creating solutions that make a real impact.
             </p>
           </div>
 
