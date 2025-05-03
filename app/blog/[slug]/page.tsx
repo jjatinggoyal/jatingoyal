@@ -3,7 +3,7 @@ import { Calendar, Tag, User, ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import { useMDXComponents } from '@/mdx-components';
+import { getMDXComponents } from '@/mdx-components';
 
 interface BlogPostPageProps {
   params: {
@@ -24,7 +24,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const currentIndex = allPosts.findIndex(p => p.slug === params.slug);
   const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
-  const components = useMDXComponents({});
+  const components = getMDXComponents();
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
@@ -96,7 +96,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <div className="container mx-auto px-4 md:px-6 py-12">
         <div className="max-w-4xl mx-auto">
           {/* Use MDXRemote with our custom components */}
-          <div className="prose prose-lg dark:prose-invert max-w-none">
+          <div className="prose prose-lg dark:prose-invert prose-slate max-w-none prose-table:my-6 prose-th:border prose-th:border-slate-200 dark:prose-th:border-slate-700 prose-td:border prose-td:border-slate-200 dark:prose-td:border-slate-700">
             <MDXRemote source={post.content} components={components} />
           </div>
 

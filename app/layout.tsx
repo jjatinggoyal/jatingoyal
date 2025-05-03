@@ -1,5 +1,6 @@
-import { Montserrat, Source_Sans_3 } from 'next/font/google';
 import './globals.css';
+import './styles/syntax.css';
+import { Montserrat, Source_Sans_3 } from 'next/font/google';
 import { Providers } from './providers';
 import Script from 'next/script';
 

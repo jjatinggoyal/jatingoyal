@@ -36,7 +36,17 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
           </div>
           <div className="flex items-center text-sm text-slate-600 dark:text-slate-400">
             <Tag className="h-4 w-4 mr-1" />
-            {post.tags.slice(0, 2).join(', ')}
+            {post.tags.slice(0, 2).map((tag, index, arr) => (
+              <React.Fragment key={tag}>
+                <Link
+                  href={`/blog?tag=${tag}`}
+                  className="hover:text-blue-600 dark:hover:text-blue-400"
+                >
+                  {tag}
+                </Link>
+                {index < arr.length - 1 && ', '}
+              </React.Fragment>
+            ))}
             {post.tags.length > 2 && ' ...'}
           </div>
         </div>
