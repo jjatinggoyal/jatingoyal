@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Github, Code, Building2, ExternalLink, Briefcase } from 'lucide-react';
 

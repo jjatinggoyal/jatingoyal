@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef } from 'react';
 import { ArrowRight, Github, Coffee, Code } from 'lucide-react';
 

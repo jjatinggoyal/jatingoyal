@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef } from 'react';
 import { BookOpen, GraduationCap, Heart, Coffee } from 'lucide-react';
 

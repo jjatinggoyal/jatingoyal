@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
+}
+
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+@layer components {
+  .theme-bg-primary {
+    @apply bg-white dark:bg-slate-900;
+  }
+
+  .theme-bg-secondary {
+    @apply bg-slate-100 dark:bg-slate-800;
+  }
+
+  .theme-bg-tertiary {
+    @apply bg-slate-50 dark:bg-slate-800/30;
+  }
+
+  .theme-primary {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  .theme-secondary {
+    @apply bg-blue-600 dark:bg-blue-400;
+  }
+
+  .theme-text-primary {
+    @apply text-slate-800 dark:text-white;
+  }
+
+  .theme-text-secondary {
+    @apply text-slate-600 dark:text-slate-300;
+  }
+
+  .theme-text-tertiary {
+    @apply text-slate-500 dark:text-slate-400;
+  }
+
+  .theme-border {
+    @apply border-t border-slate-200 dark:border-slate-700;
+  }
+
+  .theme-card {
+    @apply bg-white/80 dark:bg-slate-800/80;
+  }
+
+  .theme-modal-overlay {
+    @apply bg-black/50 backdrop-blur-sm;
+  }
+}
+
+/* Animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Font family utilities */
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.font-source-sans {
+  font-family: 'Source Sans 3', sans-serif;
+} 
