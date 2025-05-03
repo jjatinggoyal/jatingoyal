@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getMDXComponents } from '@/mdx-components';
+import { Metadata, ResolvingMetadata } from 'next';
 
 interface BlogPostPageProps {
   params: {
@@ -16,6 +17,39 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({
     slug: slug.params.slug,
   }));
+}
+
+export async function generateMetadata(
+  { params }: BlogPostPageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const post = getPostData(params.slug);
+  
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || []
+
+  return {
+    title: post.title,
+    description: post.subtitle || `${post.title} - Blog post by ${post.author}`,
+    authors: [{ name: post.author }],
+    openGraph: {
+      title: post.title,
+      description: post.subtitle || `${post.title} - Blog post by ${post.author}`,
+      type: 'article',
+      publishedTime: post.date,
+      authors: [post.author],
+      tags: post.tags,
+      images: post.previewImage 
+        ? [post.previewImage, ...previousImages]
+        : previousImages,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.subtitle || `${post.title} - Blog post by ${post.author}`,
+      images: post.previewImage ? [post.previewImage] : [],
+    },
+  }
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
