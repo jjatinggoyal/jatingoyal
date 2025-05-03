@@ -20,7 +20,9 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
   images: {
     domains: ['images.unsplash.com'],
+    unoptimized: true,
   },
+  output: 'export',
 };
 
 export default withMDX(nextConfig); 
