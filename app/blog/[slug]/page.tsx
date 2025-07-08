@@ -24,7 +24,14 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const post = getPostData(params.slug);
-  
+
+  if (!post) {
+    return {
+      title: 'Post Not Found',
+      description: 'This blog post does not exist.',
+    };
+  }
+
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
 
@@ -60,14 +67,28 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
   const components = getMDXComponents();
 
+  if (!post) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-slate-900">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold mb-4">Post Not Found</h1>
+          <p className="text-slate-600 dark:text-slate-300 mb-8">This blog post does not exist or is a draft.</p>
+          <Link href="/blog" className="text-blue-600 dark:text-blue-400 underline">
+            Go back to Blog
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-white dark:bg-slate-900 py-8">
       {/* Hero Section */}
-      <div className="py-16">
+      <div className="py-10">
         <div className="container mx-auto px-4 md:px-6">
           <article className="max-w-4xl mx-auto">
             {/* Header */}
-            <header className="text-center mb-12">
+            <header className="text-center">
               {post.previewImage && (
                 <div className="relative h-[400px] w-full mb-8 rounded-xl overflow-hidden shadow-xl animate-fade-in">
                   <Image
@@ -80,7 +101,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
               )}
 
-              <h1 className="text-4xl md:text-5xl font-bold font-montserrat text-slate-800 dark:text-white mb-6 animate-fade-in">
+              <h1 className="text-2xl md:text-3xl font-bold font-montserrat text-slate-800 dark:text-white mb-6 animate-fade-in">
                 {post.title}
               </h1>
 
@@ -127,7 +148,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 py-12">
+      <div className="container mx-auto px-4 md:px-6 py-6">
         <div className="max-w-4xl mx-auto">
           {/* Use MDXRemote with our custom components */}
           <div className="prose prose-lg dark:prose-invert prose-slate max-w-none prose-table:my-6 prose-th:border prose-th:border-slate-200 dark:prose-th:border-slate-700 prose-td:border prose-td:border-slate-200 dark:prose-td:border-slate-700">
@@ -170,4 +191,4 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </div>
     </div>
   );
-} 
+}

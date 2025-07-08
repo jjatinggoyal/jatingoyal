@@ -12,6 +12,7 @@ export interface PostMetadata {
   author: string;
   previewImage?: string;
   slug: string;
+  draft?: boolean;
 }
 
 export interface PostData extends PostMetadata {
@@ -20,21 +21,30 @@ export interface PostData extends PostMetadata {
 
 export function getAllPostSlugs() {
   const fileNames = fs.readdirSync(postsDirectory);
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        slug: fileName.replace(/\.mdx$/, ''),
-      },
-    };
-  });
+  return fileNames
+    .map((fileName) => {
+      const slug = fileName.replace(/\.mdx$/, '');
+      const post = getPostData(slug);
+      if (!post) return null;
+      return {
+        params: {
+          slug,
+        },
+      };
+    })
+    .filter((v): v is { params: { slug: string } } => !!v); // type guard to remove nulls
 }
 
-export function getPostData(slug: string): PostData {
+export function getPostData(slug: string): PostData | null {
   const fullPath = path.join(postsDirectory, `${slug}.mdx`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const { data, content } = matter(fileContents);
   const metadata = data as Omit<PostMetadata, 'slug'>;
+
+  if (metadata.draft) {
+    return null;
+  }
 
   return {
     content,
@@ -45,10 +55,12 @@ export function getPostData(slug: string): PostData {
 
 export function getAllPosts(): PostData[] {
   const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
-    const slug = fileName.replace(/\.mdx$/, '');
-    return getPostData(slug);
-  });
+  const allPostsData = fileNames
+    .map((fileName) => {
+      const slug = fileName.replace(/\.mdx$/, '');
+      return getPostData(slug);
+    })
+    .filter((post): post is PostData => !!post);
 
   // Sort posts by date in descending order (newest first)
   return allPostsData.sort((a, b) => {
@@ -84,4 +96,4 @@ export function getAllTags(): string[] {
   });
 
   return Array.from(tags);
-} 
+}
