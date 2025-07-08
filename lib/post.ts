@@ -18,6 +18,7 @@ export interface PostMetadata {
   previewImage?: string;
   slug: string;
   draft?: boolean;
+  giscus?: boolean;
 }
 
 export interface PostData extends PostMetadata {
