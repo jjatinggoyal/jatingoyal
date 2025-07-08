@@ -23,7 +23,7 @@ export async function generateMetadata(
   const { posts } = getPaginatedPosts(page);
   
   const title = `Posts - Page ${page}`;
-  const description = 'Thoughts on software development, tech trends, and engineering best practices';
+  const description = 'A place to share my thoughts and learnings';
   
   // Get the first post's image as the preview image, if available
   const previewImage = posts[0]?.previewImage;
