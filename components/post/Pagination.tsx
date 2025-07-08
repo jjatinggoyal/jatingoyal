@@ -14,7 +14,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
     <nav className="flex justify-center items-center space-x-2">
       {currentPage > 1 && (
         <Link
-          href={currentPage === 2 ? '/blog' : `/blog/page/${currentPage - 1}`}
+          href={currentPage === 2 ? '/posts' : `/posts/page/${currentPage - 1}`}
           className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
         >
           <ChevronLeft className="h-5 w-5" />
@@ -24,7 +24,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
       {pages.map((page) => (
         <Link
           key={page}
-          href={page === 1 ? '/blog' : `/blog/page/${page}`}
+          href={page === 1 ? '/posts' : `/posts/page/${page}`}
           className={`px-4 py-2 rounded-lg transition-colors ${
             currentPage === page
               ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'
@@ -37,7 +37,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
       
       {currentPage < totalPages && (
         <Link
-          href={`/blog/page/${currentPage + 1}`}
+          href={`/posts/page/${currentPage + 1}`}
           className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
         >
           <ChevronRight className="h-5 w-5" />

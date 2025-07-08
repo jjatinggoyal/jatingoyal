@@ -1,4 +1,4 @@
-import { getAllPosts, getAllTags } from '@/lib/blog';
+import { getAllPosts, getAllTags } from '@/lib/post';
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/blog`,
+      url: `${baseUrl}/posts`,
       lastModified: currentDate,
       changeFrequency: 'daily' as const,
       priority: 0.9,
@@ -39,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Blog post pages
   const blogPosts = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
+    url: `${baseUrl}/posts/${post.slug}`,
     lastModified: post.date,
     changeFrequency: 'monthly' as const,
     priority: 0.7,
@@ -47,7 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Tag pages
   const tagPages = tags.map((tag) => ({
-    url: `${baseUrl}/blog/tag/${tag}`,
+    url: `${baseUrl}/posts/tag/${tag}`,
     lastModified: currentDate,
     changeFrequency: 'weekly' as const,
     priority: 0.6,
@@ -56,7 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Blog pagination pages
   const { totalPages } = posts.length > 0 ? { totalPages: Math.ceil(posts.length / 6) } : { totalPages: 0 };
   const paginationPages = Array.from({ length: totalPages }, (_, i) => ({
-    url: `${baseUrl}/blog/page/${i + 1}`,
+    url: `${baseUrl}/posts/page/${i + 1}`,
     lastModified: currentDate,
     changeFrequency: 'daily' as const,
     priority: 0.5,

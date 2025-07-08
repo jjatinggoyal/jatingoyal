@@ -16,7 +16,7 @@ const sourceSans = Source_Sans_3({
 
 export const metadata = {
   title: 'Jatin Goyal - Software Engineer',
-  description: 'Personal portfolio and blog of Jatin Goyal, a software engineer specializing in web development and distributed systems.',
+  description: 'Personal portfolio and posts of Jatin Goyal, a software engineer specializing in web development and distributed systems.',
   metadataBase: new URL('https://jatingoyal.com'),
   openGraph: {
     title: 'Jatin Goyal',
