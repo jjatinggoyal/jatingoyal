@@ -3,6 +3,7 @@ import { Calendar, Tag, User, ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata, ResolvingMetadata } from 'next';
+import GiscusComments from '@/components/GiscusComments';
 
 interface PostPageProps {
   params: {
@@ -151,6 +152,10 @@ export default async function PostPage({ params }: PostPageProps) {
           <div className="prose prose-lg dark:prose-invert prose-slate max-w-none prose-table:my-6 prose-th:border prose-th:border-slate-200 dark:prose-th:border-slate-700 prose-td:border prose-td:border-slate-200 dark:prose-td:border-slate-700">
             {post.content}
           </div>
+
+          {post.giscus && (
+            <GiscusComments />
+          )}
 
           {/* Navigation */}
           <nav className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-4">
