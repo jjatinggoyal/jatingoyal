@@ -60,7 +60,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Blog pagination pages
-  const { totalPages } = posts.length > 0 ? { totalPages: Math.ceil(posts.length / 6) } : { totalPages: 0 };
+  const { totalPages } = posts.length > 0 ? { totalPages: Math.ceil(posts.length / 5) } : { totalPages: 0 };
   const paginationPages = Array.from({ length: totalPages }, (_, i) => ({
     url: `${baseUrl}/posts/page/${i + 1}`,
     lastModified: currentDate,
