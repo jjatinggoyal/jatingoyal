@@ -107,25 +107,7 @@ export const getMDXComponents = (components: MDXComponents = {}): MDXComponents 
         {children}
       </blockquote>
     ),
-    code: ({ children, className }) => {
-      // For inline code
-      if (!className) {
-        return (
-          <code>
-            {children}
-          </code>
-        );
-      }
-      
-      // For code blocks
-      return (
-        <pre>
-          <code className={className}>
-            {children}
-          </code>
-        </pre>
-      );
-    },
+    
     table: ({ children }) => (
       <div className="overflow-x-auto my-6">
         <table className="w-full">

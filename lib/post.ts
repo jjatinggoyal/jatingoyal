@@ -2,6 +2,11 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
+import { compileMDX } from 'next-mdx-remote/rsc';
+import rehypePrettyCode from 'rehype-pretty-code';
+import remarkGfm from 'remark-gfm';
+import { getMDXComponents } from '@/mdx-components';
+
 const postsDirectory = path.join(process.cwd(), 'posts');
 
 export interface PostMetadata {
@@ -16,7 +21,7 @@ export interface PostMetadata {
 }
 
 export interface PostData extends PostMetadata {
-  content: string;
+  content: React.ReactElement;
 }
 
 export function getAllPostSlugs() {
@@ -24,8 +29,10 @@ export function getAllPostSlugs() {
   return fileNames
     .map((fileName) => {
       const slug = fileName.replace(/\.mdx$/, '');
-      const post = getPostData(slug);
-      if (!post) return null;
+      const fullPath = path.join(postsDirectory, fileName);
+      const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const { data } = matter(fileContents);
+      if (data.draft) return null;
       return {
         params: {
           slug,
@@ -35,7 +42,7 @@ export function getAllPostSlugs() {
     .filter((v): v is { params: { slug: string } } => !!v); // type guard to remove nulls
 }
 
-export function getPostData(slug: string): PostData | null {
+export async function getPostData(slug: string): Promise<PostData | null> {
   const fullPath = path.join(postsDirectory, `${slug}.mdx`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
@@ -46,21 +53,47 @@ export function getPostData(slug: string): PostData | null {
     return null;
   }
 
+  const { frontmatter, content: compiledContent } = await compileMDX<Omit<PostMetadata, 'slug'>>({
+    source: content,
+    components: getMDXComponents(),
+    options: {
+      parseFrontmatter: false,
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [
+          [rehypePrettyCode, { theme: 'monokai', keepBackground: false }],
+        ],
+      },
+    },
+  });
+
   return {
-    content,
+    content: compiledContent,
     ...metadata,
     slug,
   };
 }
 
-export function getAllPosts(): PostData[] {
+export function getAllPosts(): PostMetadata[] {
   const fileNames = fs.readdirSync(postsDirectory);
   const allPostsData = fileNames
     .map((fileName) => {
       const slug = fileName.replace(/\.mdx$/, '');
-      return getPostData(slug);
+      const fullPath = path.join(postsDirectory, fileName);
+      const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const { data } = matter(fileContents);
+      const metadata = data as Omit<PostMetadata, 'slug'>;
+
+      if (metadata.draft) {
+        return null;
+      }
+
+      return {
+        ...metadata,
+        slug,
+      } as PostMetadata;
     })
-    .filter((post): post is PostData => !!post);
+    .filter((post): post is PostMetadata => !!post);
 
   // Sort posts by date in descending order (newest first)
   return allPostsData.sort((a, b) => {
@@ -82,7 +115,7 @@ export function getPaginatedPosts(page: number, limit: number = 5) {
   };
 }
 
-export function getPostsByTag(tag: string): PostData[] {
+export function getPostsByTag(tag: string): PostMetadata[] {
   const allPosts = getAllPosts();
   return allPosts.filter(post => post.tags.includes(tag));
 }

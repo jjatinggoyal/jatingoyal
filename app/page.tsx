@@ -1,12 +1,12 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Footer from '@/components/Footer';
-import { getAllPosts } from '@/lib/post';
+import { getAllPosts, PostMetadata } from '@/lib/post';
 import PostCard from '@/components/post/PostCard';
 import Link from 'next/link';
 
 export default function Home() {
-  const posts = getAllPosts().slice(0, 5);
+  const posts: PostMetadata[] = getAllPosts().slice(0, 5);
 
   return (
     <>
