@@ -1,5 +1,4 @@
-import React from 'react';
-import { getPaginatedPosts, getAllTags, getPostsByTag } from '@/lib/post';
+import { getPaginatedPosts, getAllTags, getPostsByTag, PostMetadata } from '@/lib/post';
 import PostCard from '@/components/post/PostCard';
 import Pagination from '@/components/post/Pagination';
 import { Tag, Search } from 'lucide-react';
@@ -13,13 +12,17 @@ interface PostPageContentProps {
 export default function PostPageContent({ page = 1, tag }: PostPageContentProps) {
   const allTags = getAllTags();
   
-  // Get posts based on whether a tag is selected
-  const { posts, totalPages } = tag 
-    ? {
-        posts: getPostsByTag(tag),
-        totalPages: 1, // No pagination for tag filtered posts for now
-      }
-    : getPaginatedPosts(page);
+  let posts: PostMetadata[];
+  let totalPages: number;
+
+  if (tag) {
+    posts = getPostsByTag(tag);
+    totalPages = 1; // No pagination for tag filtered posts for now
+  } else {
+    const paginatedResult = getPaginatedPosts(page);
+    posts = paginatedResult.posts;
+    totalPages = paginatedResult.totalPages;
+  }
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">

@@ -2,8 +2,6 @@ import { getPostData, getAllPostSlugs, getAllPosts } from '@/lib/post';
 import { Calendar, Tag, User, ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import { getMDXComponents } from '@/mdx-components';
 import { Metadata, ResolvingMetadata } from 'next';
 
 interface PostPageProps {
@@ -23,7 +21,7 @@ export async function generateMetadata(
   { params }: PostPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const post = getPostData(params.slug);
+  const post = await getPostData(params.slug);
 
   if (!post) {
     return {
@@ -60,12 +58,11 @@ export async function generateMetadata(
 }
 
 export default async function PostPage({ params }: PostPageProps) {
-  const post = getPostData(params.slug);
+  const post = await getPostData(params.slug);
   const allPosts = getAllPosts();
   const currentIndex = allPosts.findIndex(p => p.slug === params.slug);
   const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
-  const components = getMDXComponents();
 
   if (!post) {
     return (
@@ -152,7 +149,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <div className="max-w-4xl mx-auto">
           {/* Use MDXRemote with our custom components */}
           <div className="prose prose-lg dark:prose-invert prose-slate max-w-none prose-table:my-6 prose-th:border prose-th:border-slate-200 dark:prose-th:border-slate-700 prose-td:border prose-td:border-slate-200 dark:prose-td:border-slate-700">
-            <MDXRemote source={post.content} components={components} />
+            {post.content}
           </div>
 
           {/* Navigation */}
