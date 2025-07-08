@@ -2,7 +2,7 @@ import type { MDXComponents } from 'mdx/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import Alert from '@/components/blog/Alert';
+import Alert from '@/components/post/Alert';
 
 // Helper function to check if a child is a block element
 const isBlockElement = (child: React.ReactElement) => {

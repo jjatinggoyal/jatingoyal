@@ -1,4 +1,4 @@
-import { getPostData, getAllPostSlugs, getAllPosts } from '@/lib/blog';
+import { getPostData, getAllPostSlugs, getAllPosts } from '@/lib/post';
 import { Calendar, Tag, User, ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,7 +6,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getMDXComponents } from '@/mdx-components';
 import { Metadata, ResolvingMetadata } from 'next';
 
-interface BlogPostPageProps {
+interface PostPageProps {
   params: {
     slug: string;
   };
@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(
-  { params }: BlogPostPageProps,
+  { params }: PostPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const post = getPostData(params.slug);
@@ -28,7 +28,7 @@ export async function generateMetadata(
   if (!post) {
     return {
       title: 'Post Not Found',
-      description: 'This blog post does not exist.',
+      description: 'This post does not exist.',
     };
   }
 
@@ -37,11 +37,11 @@ export async function generateMetadata(
 
   return {
     title: post.title,
-    description: post.subtitle || `${post.title} - Blog post by ${post.author}`,
+    description: post.subtitle || `${post.title} - Post by ${post.author}`,
     authors: [{ name: post.author }],
     openGraph: {
       title: post.title,
-      description: post.subtitle || `${post.title} - Blog post by ${post.author}`,
+      description: post.subtitle || `${post.title} - Post by ${post.author}`,
       type: 'article',
       publishedTime: post.date,
       authors: [post.author],
@@ -53,13 +53,13 @@ export async function generateMetadata(
     twitter: {
       card: 'summary_large_image',
       title: post.title,
-      description: post.subtitle || `${post.title} - Blog post by ${post.author}`,
+      description: post.subtitle || `${post.title} - Post by ${post.author}`,
       images: post.previewImage ? [post.previewImage] : [],
     },
   }
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function PostPage({ params }: PostPageProps) {
   const post = getPostData(params.slug);
   const allPosts = getAllPosts();
   const currentIndex = allPosts.findIndex(p => p.slug === params.slug);
@@ -72,9 +72,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <div className="min-h-screen flex items-center justify-center bg-white dark:bg-slate-900">
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4">Post Not Found</h1>
-          <p className="text-slate-600 dark:text-slate-300 mb-8">This blog post does not exist or is a draft.</p>
-          <Link href="/blog" className="text-blue-600 dark:text-blue-400 underline">
-            Go back to Blog
+          <p className="text-slate-600 dark:text-slate-300 mb-8">This post does not exist or is a draft.</p>
+          <Link href="/posts" className="text-blue-600 dark:text-blue-400 underline">
+            Go back to Posts
           </Link>
         </div>
       </div>
@@ -134,7 +134,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     {post.tags.map((tag) => (
                       <Link
                         key={tag}
-                        href={`/blog/tag/${tag}`}
+                        href={`/posts/tag/${tag}`}
                         className="hover:text-blue-600 dark:hover:text-blue-400"
                       >
                         #{tag}
@@ -159,7 +159,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <nav className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-4">
             {prevPost && (
               <Link
-                href={`/blog/${prevPost.slug}`}
+                href={`/posts/${prevPost.slug}`}
                 className="group flex items-start p-4 rounded-lg bg-slate-50 dark:bg-slate-800/30 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <div>
@@ -174,7 +174,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {nextPost && (
               <Link
-                href={`/blog/${nextPost.slug}`}
+                href={`/posts/${nextPost.slug}`}
                 className="group flex items-start p-4 rounded-lg bg-slate-50 dark:bg-slate-800/30 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors ml-auto text-right"
               >
                 <div>

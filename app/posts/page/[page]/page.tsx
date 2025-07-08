@@ -1,5 +1,5 @@
-import { getPaginatedPosts } from '@/lib/blog';
-import BlogPageContent from '@/components/blog/BlogPageContent';
+import { getPaginatedPosts } from '@/lib/post';
+import PostPageContent from '@/components/post/PostPageContent';
 import { Metadata, ResolvingMetadata } from 'next';
 
 interface PageProps {
@@ -22,7 +22,7 @@ export async function generateMetadata(
   const page = Number(params.page);
   const { posts } = getPaginatedPosts(page);
   
-  const title = `Blog - Page ${page}`;
+  const title = `Posts - Page ${page}`;
   const description = 'Thoughts on software development, tech trends, and engineering best practices';
   
   // Get the first post's image as the preview image, if available
@@ -46,6 +46,6 @@ export async function generateMetadata(
   }
 }
 
-export default function BlogPageNumber({ params }: PageProps) {
-  return <BlogPageContent page={Number(params.page)} />;
+export default function PostsPageNumber({ params }: PageProps) {
+  return <PostPageContent page={Number(params.page)} />;
 } 

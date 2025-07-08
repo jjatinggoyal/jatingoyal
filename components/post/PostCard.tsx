@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, Tag } from 'lucide-react';
-import { PostMetadata } from '@/lib/blog';
+import { PostMetadata } from '@/lib/post';
 
 interface PostCardProps {
   post: PostMetadata;
@@ -39,7 +39,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
             {post.tags.slice(0, 2).map((tag, index, arr) => (
               <React.Fragment key={tag}>
                 <Link
-                  href={`/blog?tag=${tag}`}
+                  href={`/posts?tag=${tag}`}
                   className="hover:text-blue-600 dark:hover:text-blue-400"
                 >
                   {tag}
@@ -52,7 +52,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         </div>
         
         <h2 className="text-2xl font-bold mb-2 theme-text-primary">
-          <Link href={`/blog/${post.slug}`} className="hover:text-blue-600 dark:hover:text-blue-400">
+          <Link href={`/posts/${post.slug}`} className="hover:text-blue-600 dark:hover:text-blue-400">
             {post.title}
           </Link>
         </h2>
@@ -68,7 +68,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
             By {post.author}
           </span>
           <Link
-            href={`/blog/${post.slug}`}
+            href={`/posts/${post.slug}`}
             className="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline"
           >
             Read More →

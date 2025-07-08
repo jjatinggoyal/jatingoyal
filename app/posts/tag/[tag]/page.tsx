@@ -1,5 +1,5 @@
-import { getAllTags, getPostsByTag } from '@/lib/blog';
-import BlogPageContent from '@/components/blog/BlogPageContent';
+import { getAllTags, getPostsByTag } from '@/lib/post';
+import PostPageContent from '@/components/post/PostPageContent';
 import { Metadata, ResolvingMetadata } from 'next';
 
 interface PageProps {
@@ -46,6 +46,6 @@ export async function generateMetadata(
   }
 }
 
-export default function BlogTagPage({ params }: PageProps) {
-  return <BlogPageContent tag={params.tag} />;
+export default function PostsTagPage({ params }: PageProps) {
+  return <PostPageContent tag={params.tag} />;
 } 

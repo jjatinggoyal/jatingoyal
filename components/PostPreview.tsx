@@ -1,10 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { getAllPosts } from '@/lib/blog';
-import PostCard from './blog/PostCard';
+import { getAllPosts } from '@/lib/post';
+import PostCard from './post/PostCard';
 
-const BlogPreview: React.FC = () => {
+const PostPreview: React.FC = () => {
   const posts = getAllPosts().slice(0, 3); // Get latest 3 posts
 
   return (
@@ -12,7 +12,7 @@ const BlogPreview: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold font-montserrat theme-text-primary mb-4">
-            Latest Blog Posts
+            Latest Posts
           </h2>
           <p className="text-lg theme-text-secondary">
             Read my latest thoughts on software development, tech, and career
@@ -27,7 +27,7 @@ const BlogPreview: React.FC = () => {
 
         <div className="text-center">
           <Link
-            href="/blog"
+            href="/posts"
             className="inline-flex items-center gap-2 px-6 py-3 theme-bg-tertiary hover:theme-bg-secondary rounded-lg transition-all duration-300 group"
           >
             <span className="text-sm font-medium theme-text-primary">View All Posts</span>
@@ -39,4 +39,4 @@ const BlogPreview: React.FC = () => {
   );
 };
 
-export default BlogPreview; 
+export default PostPreview; 
