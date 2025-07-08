@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
 
+import ThemeToggle from './ThemeToggle';
+
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -107,6 +109,7 @@ const Header: React.FC = () => {
                 </a>
               ))}
             </div>
+            <ThemeToggle />
           </nav>
 
           {/* Mobile Menu Button */}
@@ -135,19 +138,22 @@ const Header: React.FC = () => {
                 </li>
               ))}
             </ul>
-            <div className="flex space-x-4 mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-              {socialLinks.map((link, index) => (
-                <a 
-                  key={index} 
-                  href={link.href} 
-                  aria-label={link.ariaLabel}
-                  target={link.target}
-                  rel={link.rel}
-                  className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
-                >
-                  {link.icon}
-                </a>
-              ))}
+            <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+              <div className="flex space-x-4">
+                {socialLinks.map((link, index) => (
+                  <a 
+                    key={index} 
+                    href={link.href} 
+                    aria-label={link.ariaLabel}
+                    target={link.target}
+                    rel={link.rel}
+                    className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
+                  >
+                    {link.icon}
+                  </a>
+                ))}
+              </div>
+              <ThemeToggle />
             </div>
           </div>
         )}
