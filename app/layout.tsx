@@ -15,12 +15,12 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata = {
-  title: 'Jatin Goyal - Software Engineer',
-  description: 'Personal portfolio and posts of Jatin Goyal, a software engineer specializing in web development and distributed systems.',
+  title: 'Jatin Goyal',
+  description: 'Jatin Goyal\'s personal website and blog',
   metadataBase: new URL('https://jatingoyal.com'),
   openGraph: {
     title: 'Jatin Goyal',
-    description: 'Portfolio website of Jatin Goyal, a Software Engineer specializing in Ruby, Java, Python, and cloud technologies.',
+    description: 'Jatin Goyal\'s personal website and blog',
     url: 'https://jatingoyal.com',
     siteName: 'Jatin Goyal',
     images: [
@@ -36,7 +36,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Jatin Goyal',
-    description: 'Portfolio website of Jatin Goyal, a Software Engineer specializing in Ruby, Java, Python, and cloud technologies.',
+    description: 'Jatin Goyal\'s personal website and blog',
     site: '@jatgoy',
     images: ['/images/profile.jpg'],
   },
