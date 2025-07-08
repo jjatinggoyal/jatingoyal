@@ -25,10 +25,10 @@ const Header: React.FC = () => {
   };
 
   const navLinks = [
-    { name: 'Home', href: '/#' },
-    { name: 'About', href: '/#about' },
-    { name: 'Portfolio', href: '/#portfolio' },
-    { name: 'Contact', href: '/#contact' },
+    { name: 'About', href: '/about' },
+    { name: 'Posts', href: '/posts' },
+    { name: 'Portfolio', href: '/portfolio' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   const socialLinks = [
@@ -73,7 +73,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
           <a 
-            href="#" 
+            href="/" 
             className="text-2xl font-bold font-montserrat text-blue-600 dark:text-blue-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
           >
             JG
