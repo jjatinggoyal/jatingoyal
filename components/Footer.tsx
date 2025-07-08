@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
             </a>
           </div>
           <p className="text-slate-500 dark:text-slate-400 text-sm flex items-center">
-            © {currentYear} Jatin Goyal. Made with <Heart className="h-4 w-4 text-orange-500 mx-1" /> and code
+            © {currentYear} Jatin Goyal
           </p>
         </div>
       </div>

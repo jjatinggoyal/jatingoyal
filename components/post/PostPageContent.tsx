@@ -74,7 +74,7 @@ export default function PostPageContent({ page = 1, tag }: PostPageContentProps)
           </div>
 
           {/* Posts Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="flex flex-col gap-8 mb-12">
             {posts.map((post) => (
               <PostCard key={post.slug} post={post} />
             ))}
@@ -88,4 +88,4 @@ export default function PostPageContent({ page = 1, tag }: PostPageContentProps)
       </div>
     </div>
   );
-} 
+}
