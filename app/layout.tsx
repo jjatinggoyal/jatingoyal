@@ -86,11 +86,12 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Jatin Goyal" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body suppressHydrationWarning className="antialiased bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300">
+      <body suppressHydrationWarning className="antialiased bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300 min-h-screen flex flex-col">
         <Providers>
+          {/* The children should include Header, main, and Footer */}
           {children}
         </Providers>
       </body>
     </html>
   );
-} 
+}
