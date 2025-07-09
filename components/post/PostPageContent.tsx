@@ -1,7 +1,7 @@
 import { getPaginatedPosts, getAllTags, getPostsByTag, PostMetadata } from '@/lib/post';
 import PostCard from '@/components/post/PostCard';
 import Pagination from '@/components/post/Pagination';
-import { Tag, Search } from 'lucide-react';
+import { Tag, Rss } from 'lucide-react';
 import Link from 'next/link';
 
 interface PostPageContentProps {
@@ -74,6 +74,16 @@ export default function PostPageContent({ page = 1, tag }: PostPageContentProps)
                 ))}
               </div>
             </div>
+          </div>
+
+          <div className="flex justify-end mb-4">
+            <Link
+              href="/feed.xml"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-orange-100 dark:bg-orange-900 text-orange-700 dark:text-orange-300 hover:bg-orange-200 dark:hover:bg-orange-800 transition-colors text-sm font-medium"
+            >
+              <Rss className="h-4 w-4" />
+              <span>Grab the RSS feed</span>
+            </Link>
           </div>
 
           {/* Posts Grid */}

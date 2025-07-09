@@ -23,7 +23,7 @@ export default function Home() {
               <PostCard key={post.slug} post={post} />
             ))}
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center gap-4">
             <Link
               href="/posts"
               className="inline-block px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"

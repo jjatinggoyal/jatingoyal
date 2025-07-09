@@ -1,5 +1,5 @@
 import { getPostData, getAllPostSlugs, getAllPosts } from '@/lib/post';
-import { Calendar, Tag, User, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Calendar, Tag, User, ArrowLeft, ArrowRight, Rss } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata, ResolvingMetadata } from 'next';
@@ -110,10 +110,12 @@ export default async function PostPage({ params }: PostPageProps) {
               )}
 
               <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-600 dark:text-slate-400 animate-fade-in animation-delay-200">
-                <div className="flex items-center gap-2">
-                  <User className="h-4 w-4" />
-                  <span>{post.author}</span>
-                </div>
+                {post.author && (
+                  <div className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    <span>{post.author}</span>
+                  </div>
+                )}
 
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4" />
@@ -139,6 +141,12 @@ export default async function PostPage({ params }: PostPageProps) {
                       </Link>
                     ))}
                   </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Rss className="h-4 w-4" />
+                  <Link href="/feed.xml" className="hover:text-blue-600 dark:hover:text-blue-400">
+                    RSS Feed
+                  </Link>
                 </div>
               </div>
             </header>

@@ -7,6 +7,12 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 import { getMDXComponents } from '@/mdx-components';
 
+import { unified } from 'unified'
+import remarkParse from 'remark-parse'
+import remarkMdx from 'remark-mdx'
+import remarkRehype from 'remark-rehype'
+import rehypeStringify from 'rehype-stringify'
+
 const postsDirectory = path.join(process.cwd(), 'posts');
 
 export interface PostMetadata {
@@ -130,4 +136,27 @@ export function getAllTags(): string[] {
   });
 
   return Array.from(tags);
+}
+
+export async function getPostHtml(slug: string): Promise<string | null> {
+    const fullPath = path.join(postsDirectory, `${slug}.mdx`);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+    const { data, content } = matter(fileContents);
+    const metadata = data as Omit<PostMetadata, 'slug'>;
+
+    if (metadata.draft) {
+        return null;
+    }
+
+    const file = await unified()
+      .use(remarkParse)
+      .use(remarkMdx)
+      .use(remarkGfm)
+      .use(remarkRehype, { allowDangerousHtml: true })
+      .use(rehypePrettyCode, { theme: 'monokai', keepBackground: false })
+      .use(rehypeStringify)
+      .process(content)
+
+    return String(file.value);
 }

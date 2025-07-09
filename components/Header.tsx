@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Mail, Rss } from 'lucide-react';
 
 import ThemeToggle from './ThemeToggle';
 
@@ -63,6 +63,11 @@ const Header: React.FC = () => {
       icon: <Mail className="h-5 w-5" />, 
       href: 'mailto:jjatinggoyal@gmail.com', 
       ariaLabel: 'Email' 
+    },
+    { 
+      icon: <Rss className="h-5 w-5" />, 
+      href: '/feed.xml', 
+      ariaLabel: 'RSS Feed' 
     },
   ];
 
