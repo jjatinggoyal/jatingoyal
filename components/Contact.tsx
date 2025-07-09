@@ -53,10 +53,10 @@ const Contact: React.FC = () => {
                 <div>
                   <p className="text-sm theme-text-tertiary mb-1">Email</p>
                   <a 
-                    href="mailto:jjatingoyal@gmail.com" 
+                    href="mailto:jjatinggoyal@gmail.com" 
                     className="theme-text-primary hover:theme-primary transition-colors"
                   >
-                    jjatingoyal@gmail.com
+                    jjatinggoyal@gmail.com
                   </a>
                 </div>
               </div>

@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
               </svg>
             </a>
             <a 
-              href="mailto:jjatingoyal@gmail.com" 
+              href="mailto:jjatinggoyal@gmail.com" 
               className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
               aria-label="Email"
             >

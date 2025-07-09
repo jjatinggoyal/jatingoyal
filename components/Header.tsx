@@ -59,7 +59,7 @@ const Header: React.FC = () => {
     },
     { 
       icon: <Mail className="h-5 w-5" />, 
-      href: 'mailto:jjatingoyal@gmail.com', 
+      href: 'mailto:jjatinggoyal@gmail.com', 
       ariaLabel: 'Email' 
     },
   ];
