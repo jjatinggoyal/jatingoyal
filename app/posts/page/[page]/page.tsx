@@ -1,5 +1,5 @@
 import { getPaginatedPosts } from '@/lib/post';
-import PostPageContent from '@/components/post/PostPageContent';
+import PostsPageContent from '@/components/post/PostsPageContent';
 import { Metadata, ResolvingMetadata } from 'next';
 
 interface PageProps {
@@ -47,5 +47,5 @@ export async function generateMetadata(
 }
 
 export default function PostsPageNumber({ params }: PageProps) {
-  return <PostPageContent page={Number(params.page)} />;
+  return <PostsPageContent page={Number(params.page)} />;
 } 

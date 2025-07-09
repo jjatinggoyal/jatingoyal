@@ -1,4 +1,4 @@
-import PostPageContent from '@/components/post/PostPageContent';
+import PostsPageContent from '@/components/post/PostsPageContent';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -17,5 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function PostPage() {
-  return <PostPageContent />;
+  return <PostsPageContent />;
 } 

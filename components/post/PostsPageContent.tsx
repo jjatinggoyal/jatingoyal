@@ -4,12 +4,12 @@ import Pagination from '@/components/post/Pagination';
 import { Tag, Rss } from 'lucide-react';
 import Link from 'next/link';
 
-interface PostPageContentProps {
+interface PostsPageContentProps {
   page?: number;
   tag?: string;
 }
 
-export default function PostPageContent({ page = 1, tag }: PostPageContentProps) {
+export default function PostsPageContent({ page = 1, tag }: PostsPageContentProps) {
   const allTags = getAllTags();
   
   let posts: PostMetadata[];

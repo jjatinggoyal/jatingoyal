@@ -11,17 +11,6 @@ interface PostCardProps {
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
   return (
     <article className="relative flex flex-col md:flex-row bg-white dark:bg-slate-800 rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg border border-slate-200 dark:border-slate-700 w-full group">
-      {post.previewImage && (
-        <div className="relative w-full md:w-64 h-48 md:h-auto flex-shrink-0">
-          <Image
-            src={post.previewImage}
-            alt={post.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
-          />
-        </div>
-      )}
       <div className="p-6 flex flex-col justify-between w-full">
         <div>
           <div className="flex items-center gap-4 mb-4">
@@ -69,14 +58,19 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
           <span className="text-sm theme-text-secondary">
             By {post.author}
           </span>
-          <Link
-            href={`/posts/${post.slug}`}
-            className="text-blue-600 dark:text-blue-400 text-sm font-medium hover:underline z-10 relative"
-          >
-            Read More →
-          </Link>
         </div>
       </div>
+      {post.previewImage && (
+        <div className="relative w-full md:w-64 h-48 md:h-auto flex-shrink-0">
+          <Image
+            src={post.previewImage}
+            alt={post.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
+          />
+        </div>
+      )}
       {/* Overlay link for the whole card except tags */}
       <Link
         href={`/posts/${post.slug}`}
