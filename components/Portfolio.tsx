@@ -53,12 +53,12 @@ const Portfolio: React.FC = () => {
   }, [activeProject]);
 
   const project = {
-    title: 'Content Automation Platform - ShortsKing.com',
+    title: 'Content Automation Platform - ShortsKing.com (Now Archived)',
     description: 'A fully automated short video content creation platform with minimal user input.',
     longDescription: "Developed and launched a fully automated short video content creation platform requiring minimal user input (title, visual style, voice). The platform organically attracted over 500 real users. Independently managed the complete lifecycle of the Ruby on Rails full-stack application, including design, development (frontend/backend), deployment, integrations, and marketing. Leveraged open-source LLMs and ffmpeg for content generation and processing.",
     image: '/images/shortsking.png',
     technologies: ['Ruby on Rails', 'LLMs', 'ffmpeg', 'AWS', 'React', 'PostgreSQL'],
-    demoLink: 'https://shortsking.com'
+    demoLink: 'https://web.archive.org/web/20250915014103/https://shortsking.com/'
   };
 
   return (
@@ -146,7 +146,7 @@ const Portfolio: React.FC = () => {
                     onClick={(e) => e.stopPropagation()}
                   >
                     <ExternalLink className="h-5 w-5" />
-                    <span className="font-medium">Visit ShortsKing</span>
+                    <span className="font-medium">ShortsKing (Archive.org)</span>
                   </a>
                 </div>
               </div>
@@ -193,7 +193,7 @@ const Portfolio: React.FC = () => {
                         className="flex items-center gap-x-2 theme-primary"
                       >
                         <ExternalLink className="h-5 w-5" />
-                        <span className="font-medium">Visit ShortsKing</span>
+                        <span className="font-medium">ShortsKing (Archive.org)</span>
                       </a>
                     )}
                   </div>
