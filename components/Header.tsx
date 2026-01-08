@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Mail, Rss } from 'lucide-react';
+
+import ThemeToggle from './ThemeToggle';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,10 +27,10 @@ const Header: React.FC = () => {
   };
 
   const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'About', href: '#about' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'About', href: '/about' },
+    { name: 'Posts', href: '/posts' },
+    { name: 'Portfolio', href: '/portfolio' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   const socialLinks = [
@@ -62,6 +64,11 @@ const Header: React.FC = () => {
       href: 'mailto:jjatinggoyal@gmail.com', 
       ariaLabel: 'Email' 
     },
+    { 
+      icon: <Rss className="h-5 w-5" />, 
+      href: '/feed.xml', 
+      ariaLabel: 'RSS Feed' 
+    },
   ];
 
   return (
@@ -73,7 +80,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
           <a 
-            href="#" 
+            href="/" 
             className="text-2xl font-bold font-montserrat text-blue-600 dark:text-blue-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
           >
             JG
@@ -107,6 +114,7 @@ const Header: React.FC = () => {
                 </a>
               ))}
             </div>
+            <ThemeToggle />
           </nav>
 
           {/* Mobile Menu Button */}
@@ -135,19 +143,22 @@ const Header: React.FC = () => {
                 </li>
               ))}
             </ul>
-            <div className="flex space-x-4 mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-              {socialLinks.map((link, index) => (
-                <a 
-                  key={index} 
-                  href={link.href} 
-                  aria-label={link.ariaLabel}
-                  target={link.target}
-                  rel={link.rel}
-                  className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
-                >
-                  {link.icon}
-                </a>
-              ))}
+            <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+              <div className="flex space-x-4">
+                {socialLinks.map((link, index) => (
+                  <a 
+                    key={index} 
+                    href={link.href} 
+                    aria-label={link.ariaLabel}
+                    target={link.target}
+                    rel={link.rel}
+                    className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
+                  >
+                    {link.icon}
+                  </a>
+                ))}
+              </div>
+              <ThemeToggle />
             </div>
           </div>
         )}

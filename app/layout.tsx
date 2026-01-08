@@ -1,26 +1,26 @@
-import { Inter, Montserrat, Source_Sans_3 } from 'next/font/google';
 import './globals.css';
+import './styles/syntax.css';
+import { Montserrat, Source_Sans_3 } from 'next/font/google';
 import { Providers } from './providers';
 import Script from 'next/script';
 
-const inter = Inter({ subsets: ['latin'] });
-const montserrat = Montserrat({ 
+const montserrat = Montserrat({
   subsets: ['latin'],
-  variable: '--font-montserrat'
+  variable: '--font-montserrat',
 });
+
 const sourceSans = Source_Sans_3({
   subsets: ['latin'],
   variable: '--font-source-sans',
-  weight: ['300', '400', '600']
 });
 
 export const metadata = {
   title: 'Jatin Goyal',
-  description: 'Portfolio website of Jatin Goyal, a Software Engineer specializing in Ruby, Java, Python, and cloud technologies.',
+  description: 'Jatin Goyal\'s personal website and blog',
   metadataBase: new URL('https://jatingoyal.com'),
   openGraph: {
     title: 'Jatin Goyal',
-    description: 'Portfolio website of Jatin Goyal, a Software Engineer specializing in Ruby, Java, Python, and cloud technologies.',
+    description: 'Jatin Goyal\'s personal website and blog',
     url: 'https://jatingoyal.com',
     siteName: 'Jatin Goyal',
     images: [
@@ -36,7 +36,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Jatin Goyal',
-    description: 'Portfolio website of Jatin Goyal, a Software Engineer specializing in Ruby, Java, Python, and cloud technologies.',
+    description: 'Jatin Goyal\'s personal website and blog',
     site: '@jatgoy',
     images: ['/images/profile.jpg'],
   },
@@ -85,14 +85,14 @@ export default function RootLayout({
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-title" content="Jatin Goyal" />
         <link rel="manifest" href="/site.webmanifest" />
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed for Jatin Goyal's Posts" href="/feed.xml" />
       </head>
-      <body suppressHydrationWarning className="antialiased bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300">
+      <body suppressHydrationWarning className="antialiased bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300 min-h-screen flex flex-col">
         <Providers>
-          <div className={inter.className}>
-            {children}
-          </div>
+          {/* The children should include Header, main, and Footer */}
+          {children}
         </Providers>
       </body>
     </html>
   );
-} 
+}

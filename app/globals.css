@@ -2,22 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
+@layer utilities {
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .bg-grid-slate-900\/\[0\.04\] {
+    background-image: linear-gradient(to right, #0f172a0a 1px, transparent 1px),
+      linear-gradient(to bottom, #0f172a0a 1px, transparent 1px);
+  }
+
+  .bg-grid-slate-100\/\[0\.03\] {
+    background-image: linear-gradient(to right, #f1f5f90a 1px, transparent 1px),
+      linear-gradient(to bottom, #f1f5f90a 1px, transparent 1px);
+  }
 }
 
-.dark {
-  --foreground-rgb: 255, 255, 255;
-  --background-rgb: 0, 0, 0;
-}
+@layer base {
+  :root {
+    --theme-primary: #1a1a1a;
+    --theme-secondary: #4a4a4a;
+    --theme-tertiary: #f5f5f5;
+    --theme-border: #e5e5e5;
+    --theme-background: #ffffff;
+  }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+  .dark {
+    --theme-primary: #ffffff;
+    --theme-secondary: #a3a3a3;
+    --theme-tertiary: #1f2937;
+    --theme-border: #374151;
+    --theme-background: #111827;
+  }
 }
 
 @layer components {
+  .theme-text-primary {
+    color: var(--theme-primary);
+  }
+
+  .theme-text-secondary {
+    color: var(--theme-secondary);
+  }
+
+  .theme-bg-primary {
+    background-color: var(--theme-background);
+  }
+
+  .theme-bg-secondary {
+    background-color: var(--theme-tertiary);
+  }
+
+  .theme-bg-tertiary {
+    background-color: var(--theme-tertiary);
+    opacity: 0.7;
+  }
+
+  .theme-border {
+    border-color: var(--theme-border);
+  }
+
+  .theme-primary {
+    color: var(--theme-primary);
+  }
+
   .theme-bg-primary {
     @apply bg-white dark:bg-slate-900;
   }
@@ -30,14 +102,6 @@ body {
     @apply bg-slate-50 dark:bg-slate-800/30;
   }
 
-  .theme-primary {
-    @apply text-blue-600 dark:text-blue-400;
-  }
-
-  .theme-secondary {
-    @apply bg-blue-600 dark:bg-blue-400;
-  }
-
   .theme-text-primary {
     @apply text-slate-800 dark:text-white;
   }
@@ -48,10 +112,6 @@ body {
 
   .theme-text-tertiary {
     @apply text-slate-500 dark:text-slate-400;
-  }
-
-  .theme-border {
-    @apply border-t border-slate-200 dark:border-slate-700;
   }
 
   .theme-card {

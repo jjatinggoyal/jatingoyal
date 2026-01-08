@@ -31,7 +31,7 @@ const Hero: React.FC = () => {
     <section 
       id="hero" 
       ref={heroRef}
-      className="min-h-screen flex items-center relative pt-20 pb-16"
+      className="relative pt-24 pb-16"
     >
       <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
         <div className="order-2 md:order-1">
@@ -46,13 +46,13 @@ const Hero: React.FC = () => {
           </p>
           <div className="flex flex-wrap gap-4 mb-12 animate-on-scroll opacity-0 transition-opacity duration-1000 delay-300">
             <a 
-              href="#portfolio" 
+              href="/portfolio" 
               className="inline-flex items-center px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
             >
               View My Portfolio <ArrowRight className="ml-2 h-5 w-5" />
             </a>
             <a 
-              href="#contact" 
+              href="/contact" 
               className="inline-flex items-center px-6 py-3 rounded-lg border-2 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-blue-600 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 font-medium transition-colors"
             >
               Get In Touch

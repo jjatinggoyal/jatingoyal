@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import { Github, Linkedin, Mail, Rss } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -45,9 +45,16 @@ const Footer: React.FC = () => {
             >
               <Mail className="h-5 w-5" />
             </a>
+            <a 
+              href="/feed.xml" 
+              className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
+              aria-label="RSS Feed"
+            >
+              <Rss className="h-5 w-5" />
+            </a>
           </div>
           <p className="text-slate-500 dark:text-slate-400 text-sm flex items-center">
-            © {currentYear} Jatin Goyal. Made with <Heart className="h-4 w-4 text-orange-500 mx-1" /> and code
+            © {currentYear} Jatin Goyal
           </p>
         </div>
       </div>

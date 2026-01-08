@@ -1,14 +1,14 @@
+
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { Moon, Sun } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 
 const ThemeToggle = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
-  // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -20,14 +20,10 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="w-10 h-10 rounded-lg theme-bg-tertiary flex items-center justify-center hover:theme-bg-secondary transition-colors"
+      className="p-2 rounded-md text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
       aria-label="Toggle theme"
     >
-      {theme === 'dark' ? (
-        <Sun className="h-5 w-5 theme-primary" />
-      ) : (
-        <Moon className="h-5 w-5 theme-primary" />
-      )}
+      {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
     </button>
   );
 };
