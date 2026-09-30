@@ -1,97 +1,116 @@
-'use client';
+import React from 'react';
+import { ArrowDown, ArrowUpRight, MapPin } from 'lucide-react';
+import { RESUME } from './links';
 
-import React, { useEffect, useRef } from 'react';
-import { ArrowRight, Github, Coffee, Code } from 'lucide-react';
-import Image from 'next/image';
+// Deterministic bar heights so the waveform renders the same on every build
+const bars = Array.from({ length: 36 }, (_, i) => {
+  const h = 0.35 + 0.65 * Math.abs(Math.sin(i * 1.7) * Math.cos(i * 0.45));
+  return { h: Math.round(h * 100), delay: ((i * 83) % 1200) / 1000 };
+});
 
-const Hero: React.FC = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    
-    const elements = heroRef.current?.querySelectorAll('.animate-on-scroll');
-    elements?.forEach((el) => observer.observe(el));
-    
-    return () => {
-      elements?.forEach((el) => observer.unobserve(el));
-    };
-  }, []);
-  
-  return (
-    <section 
-      id="hero" 
-      ref={heroRef}
-      className="min-h-screen flex items-center relative pt-20 pb-16"
-    >
-      <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
-        <div className="order-2 md:order-1">
-          <span className="inline-block px-3 py-1 rounded-full bg-slate-100/80 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 text-sm font-medium mb-6 animate-on-scroll opacity-0 transition-opacity duration-1000 delay-300">
-            Software Engineer at Enphase Energy
+const transcript = [
+  { who: 'caller', text: 'Hi, mera order kab tak aayega?' },
+  { who: 'agent', text: 'Ek second, main check karta hoon…', tool: 'lookup_order()' },
+  { who: 'agent', text: 'Aapka order kal tak deliver ho jayega.' },
+];
+
+const CallCard = () => (
+  <div className="rise card relative overflow-hidden p-5 shadow-2xl shadow-cyan-500/10 [animation-delay:250ms]">
+    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent" />
+
+    <div className="mb-5 flex items-center justify-between font-mono text-xs">
+      <span className="flex items-center gap-2 text-emerald-300">
+        <span className="pulse-dot h-2 w-2 rounded-full bg-emerald-400" />
+        live call · en / hi
+      </span>
+      <span className="hidden text-zinc-500 sm:inline">sip → livekit → agent</span>
+    </div>
+
+    <div className="mb-6 flex h-20 items-center justify-between gap-[3px]" aria-hidden="true">
+      {bars.map((bar, i) => (
+        <span
+          key={i}
+          className="wave-bar w-full rounded-full bg-gradient-to-t from-cyan-400 to-violet-400"
+          style={{ height: `${bar.h}%`, animationDelay: `${bar.delay}s` }}
+        />
+      ))}
+    </div>
+
+    <ul className="space-y-3 font-mono text-[13px] leading-relaxed">
+      {transcript.map((line, i) => (
+        <li key={i} className="flex gap-3">
+          <span className={line.who === 'caller' ? 'w-12 shrink-0 text-violet-300' : 'w-12 shrink-0 text-cyan-300'}>
+            {line.who}
           </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-montserrat leading-tight text-slate-800 dark:text-white mb-6 animate-on-scroll opacity-0 transition-opacity duration-1000">
-            Hi, I&apos;m <span className="text-blue-600 dark:text-blue-400">Jatin Goyal</span>
-          </h1>
-          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-lg animate-on-scroll opacity-0 transition-opacity duration-1000 delay-150">
-            Full-stack engineer specializing in building scalable microservices and data systems. Experienced with Ruby on Rails, Java, and Python. Open-source contributor to Ruby on Rails ecosystem.
-          </p>
-          <div className="flex flex-wrap gap-4 mb-12 animate-on-scroll opacity-0 transition-opacity duration-1000 delay-300">
-            <a 
-              href="#portfolio" 
-              className="inline-flex items-center px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
-            >
-              View My Portfolio <ArrowRight className="ml-2 h-5 w-5" />
-            </a>
-            <a 
-              href="#contact" 
-              className="inline-flex items-center px-6 py-3 rounded-lg border-2 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-blue-600 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 font-medium transition-colors"
-            >
-              Get In Touch
-            </a>
-          </div>
-          
-          <div className="flex items-center gap-x-6 animate-on-scroll opacity-0 transition-opacity duration-1000 delay-450">
-            <a 
-              href="https://github.com/jjatinggoyal" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-x-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            >
-              <Github className="h-5 w-5" />
-              <span>GitHub</span>
-            </a>
-            <div className="h-4 border-r border-slate-300 dark:border-slate-700"></div>
-            <div className="flex items-center gap-x-2 text-slate-600 dark:text-slate-400">
-              <Coffee className="h-5 w-5" />
-              <span>Open to opportunities</span>
-            </div>
-          </div>
+          <span className="text-zinc-300">
+            {line.tool && <span className="mr-2 rounded bg-white/[0.06] px-1.5 py-0.5 text-amber-200">{line.tool}</span>}
+            {line.text}
+          </span>
+        </li>
+      ))}
+    </ul>
+
+    <div className="mt-5 flex flex-wrap gap-2 border-t border-white/[0.06] pt-4">
+      {['VAD', 'streaming STT', 'turn detection', 'intent', 'tool call', 'TTS'].map((step) => (
+        <span key={step} className="chip text-[11px]">{step}</span>
+      ))}
+    </div>
+    <p className="mt-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">Illustrative example</p>
+  </div>
+);
+
+const Hero = () => (
+  <section id="top" className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
+    <div className="grid-bg pointer-events-none absolute inset-0" />
+    <div className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl" />
+    <div className="pointer-events-none absolute top-40 -right-40 h-[380px] w-[380px] rounded-full bg-violet-500/10 blur-3xl" />
+
+    <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-4 md:px-6 lg:grid-cols-[1.15fr_1fr]">
+      <div>
+        <a
+          href="#javis"
+          className="rise mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] py-1.5 pl-2 pr-4 text-sm text-zinc-300 transition-colors hover:border-cyan-300/40"
+        >
+          <span className="rounded-full bg-cyan-300/15 px-2 py-0.5 font-mono text-xs text-cyan-200">Now</span>
+          Senior AI Engineer at Javis Technologies
+        </a>
+
+        <h1 className="rise font-display text-5xl font-semibold leading-[1.02] tracking-tight text-white md:text-7xl [animation-delay:80ms]">
+          I build voice AI that <span className="text-gradient">picks up the phone.</span>
+        </h1>
+
+        <p className="rise mt-7 max-w-xl text-lg leading-relaxed text-zinc-400 md:text-xl [animation-delay:160ms]">
+          Hi, I&apos;m Jatin. I build real-time voice agents that handle live customer calls in English and Hindi,
+          and the SIP telephony stack that connects them to the phone network. Before that I spent three years
+          on microservices and search at Enphase Energy.
+        </p>
+
+        <div className="rise mt-10 flex flex-wrap items-center gap-4 [animation-delay:240ms]">
+          <a
+            href="#javis"
+            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-300 to-violet-400 px-6 py-3 font-medium text-ink-950 transition-opacity hover:opacity-90"
+          >
+            What I&apos;m building <ArrowDown className="h-4 w-4" />
+          </a>
+          <a
+            href={RESUME}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-6 py-3 font-medium text-white transition-colors hover:border-white/30 hover:bg-white/[0.04]"
+          >
+            Resume <ArrowUpRight className="h-4 w-4" />
+          </a>
         </div>
-        
-        <div className="relative order-1 md:order-2 animate-on-scroll opacity-0 transition-opacity duration-1000 delay-300">
-          <div className="relative w-48 h-48 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto rounded-2xl overflow-hidden bg-slate-100/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
-            <Image
-              src="/images/profile.jpg"
-              alt="Jatin Goyal"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 192px, (max-width: 1024px) 320px, 384px"
-              priority
-            />
-          </div>
+
+        <div className="rise mt-10 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-zinc-500 [animation-delay:320ms]">
+          <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" /> Bangalore, IN</span>
+          <span>B.Tech CSE · IIT Delhi</span>
         </div>
       </div>
-    </section>
-  );
-};
+
+      <CallCard />
+    </div>
+  </section>
+);
 
 export default Hero;

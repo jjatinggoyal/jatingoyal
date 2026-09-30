@@ -2,88 +2,157 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
-}
-
-.dark {
-  --foreground-rgb: 255, 255, 255;
-  --background-rgb: 0, 0, 0;
+html {
+  background: #05060a;
+  color-scheme: dark;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+  @apply bg-ink-950 text-zinc-300 font-sans antialiased;
+}
+
+::selection {
+  @apply bg-cyan-300/30 text-white;
 }
 
 @layer components {
-  .theme-bg-primary {
-    @apply bg-white dark:bg-slate-900;
+  .text-gradient {
+    @apply bg-gradient-to-r from-cyan-300 via-sky-300 to-violet-400 bg-clip-text text-transparent;
   }
 
-  .theme-bg-secondary {
-    @apply bg-slate-100 dark:bg-slate-800;
+  .card {
+    @apply rounded-2xl border border-white/[0.07] bg-ink-900/70 backdrop-blur-sm;
   }
 
-  .theme-bg-tertiary {
-    @apply bg-slate-50 dark:bg-slate-800/30;
+  .chip {
+    @apply inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-xs text-zinc-300;
   }
 
-  .theme-primary {
-    @apply text-blue-600 dark:text-blue-400;
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.2em] text-cyan-300/80;
   }
 
-  .theme-secondary {
-    @apply bg-blue-600 dark:bg-blue-400;
-  }
-
-  .theme-text-primary {
-    @apply text-slate-800 dark:text-white;
-  }
-
-  .theme-text-secondary {
-    @apply text-slate-600 dark:text-slate-300;
-  }
-
-  .theme-text-tertiary {
-    @apply text-slate-500 dark:text-slate-400;
-  }
-
-  .theme-border {
-    @apply border-t border-slate-200 dark:border-slate-700;
-  }
-
-  .theme-card {
-    @apply bg-white/80 dark:bg-slate-800/80;
-  }
-
-  .theme-modal-overlay {
-    @apply bg-black/50 backdrop-blur-sm;
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 75%);
   }
 }
 
-/* Animation classes */
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-in forwards;
+/* Load-in animation (CSS only, content stays visible without JS) */
+.rise {
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
-@keyframes fadeIn {
+@keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
-/* Font family utilities */
-.font-montserrat {
-  font-family: 'Montserrat', sans-serif;
+/* Scroll reveal where supported; other browsers just show the content */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
 }
 
-.font-source-sans {
-  font-family: 'Source Sans 3', sans-serif;
-} 
+/* Voice waveform */
+.wave-bar {
+  animation: wave 1.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* Packets travelling along the call pipeline */
+.flow-h,
+.flow-v {
+  position: relative;
+  overflow: hidden;
+}
+
+.flow-h::after,
+.flow-v::after {
+  content: '';
+  position: absolute;
+  border-radius: 9999px;
+  background: #67e8f9;
+  box-shadow: 0 0 12px 2px rgba(103, 232, 249, 0.7);
+}
+
+.flow-h::after {
+  top: -2px;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  animation: flow-h 2.4s linear infinite;
+}
+
+.flow-v::after {
+  left: -2px;
+  top: 0;
+  width: 5px;
+  height: 5px;
+  animation: flow-v 2.4s linear infinite;
+}
+
+@keyframes flow-h {
+  from {
+    left: -5px;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes flow-v {
+  from {
+    top: -5px;
+  }
+  to {
+    top: 100%;
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(52, 211, 153, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .reveal,
+  .wave-bar,
+  .pulse-dot,
+  .flow-h::after,
+  .flow-v::after {
+    animation: none !important;
+  }
+}

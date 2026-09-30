@@ -1,42 +1,37 @@
-import { Inter, Montserrat, Source_Sans_3 } from 'next/font/google';
-import './globals.css';
-import { Providers } from './providers';
+import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google';
 import Script from 'next/script';
+import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
-const montserrat = Montserrat({ 
-  subsets: ['latin'],
-  variable: '--font-montserrat'
-});
-const sourceSans = Source_Sans_3({
-  subsets: ['latin'],
-  variable: '--font-source-sans',
-  weight: ['300', '400', '600']
-});
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const display = Space_Grotesk({ subsets: ['latin'], variable: '--font-display' });
+const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' });
+
+const description =
+  'Jatin Goyal — Senior AI Engineer at Javis Technologies, building real-time voice AI agents and the SIP telephony stack behind them.';
 
 export const metadata = {
-  title: 'Jatin Goyal',
-  description: 'Portfolio website of Jatin Goyal, a Software Engineer specializing in Ruby, Java, Python, and cloud technologies.',
+  title: 'Jatin Goyal — Senior AI Engineer',
+  description,
   metadataBase: new URL('https://jatingoyal.com'),
   openGraph: {
-    title: 'Jatin Goyal',
-    description: 'Portfolio website of Jatin Goyal, a Software Engineer specializing in Ruby, Java, Python, and cloud technologies.',
+    title: 'Jatin Goyal — Senior AI Engineer',
+    description,
     url: 'https://jatingoyal.com',
     siteName: 'Jatin Goyal',
     images: [
       {
         url: '/images/profile.jpg',
-        width: 800,
-        height: 600,
+        width: 640,
+        height: 640,
       },
     ],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Jatin Goyal',
-    description: 'Portfolio website of Jatin Goyal, a Software Engineer specializing in Ruby, Java, Python, and cloud technologies.',
+    card: 'summary',
+    title: 'Jatin Goyal — Senior AI Engineer',
+    description,
     site: '@jatgoy',
     images: ['/images/profile.jpg'],
   },
@@ -45,27 +40,18 @@ export const metadata = {
   },
 };
 
+export const viewport = {
+  themeColor: '#05060a',
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${montserrat.variable} ${sourceSans.variable} scroll-smooth`}>
+    <html lang="en" className={`${inter.variable} ${display.variable} ${mono.variable} scroll-smooth`}>
       <head>
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-        />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Source+Sans+3:wght@300;400;600&display=swap"
-          rel="stylesheet"
-        />
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-L58B15TGV4"
@@ -86,13 +72,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Jatin Goyal" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body suppressHydrationWarning className="antialiased bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300">
-        <Providers>
-          <div className={inter.className}>
-            {children}
-          </div>
-        </Providers>
-      </body>
+      <body>{children}</body>
     </html>
   );
-} 
+}
