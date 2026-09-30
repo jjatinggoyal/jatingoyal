@@ -5,7 +5,7 @@ const groups = [
   {
     name: 'Agents & LLM systems',
     featured: true,
-    items: ['Context & memory', 'Reference resolution', 'LLM tool-calling', 'Structured extraction', 'gRPC / Protobuf', 'DynamoDB'],
+    items: ['AI agents', 'LLM tool-calling', 'gRPC / Protobuf', 'DynamoDB'],
   },
   {
     name: 'Voice & real-time',

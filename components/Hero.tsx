@@ -1,63 +1,30 @@
 import React from 'react';
 import { ArrowDown, ArrowUpRight, MapPin } from 'lucide-react';
+import Image from 'next/image';
 import { RESUME } from './links';
 
-const turns = [
-  { who: 'user', text: 'Status of PO 4521 and 4533?' },
-  { who: 'agent', text: 'PO 4521 is dispatched. PO 4533 is awaiting an appointment slot.' },
-  { who: 'user', text: 'Book the second one for Friday.' },
-];
-
-const ContextCard = () => (
-  <div className="rise card relative overflow-hidden p-5 shadow-2xl shadow-cyan-500/10 [animation-delay:250ms]">
-    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent" />
-
-    <div className="mb-5 flex items-center justify-between font-mono text-xs">
-      <span className="flex items-center gap-2 text-emerald-300">
-        <span className="pulse-dot h-2 w-2 rounded-full bg-emerald-400" />
-        turn 3 · context
-      </span>
-      <span className="hidden text-zinc-500 sm:inline">fetch → resolve → decide → fold</span>
+const Portrait = () => (
+  <div className="rise relative mx-auto w-full max-w-sm [animation-delay:250ms]">
+    <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-cyan-400/20 via-transparent to-violet-500/20 blur-2xl" />
+    <div className="card relative overflow-hidden p-3">
+      <div className="relative aspect-square overflow-hidden rounded-xl">
+        <Image
+          src="/images/profile.jpg"
+          alt="Jatin Goyal"
+          fill
+          priority
+          className="object-cover"
+          sizes="(max-width: 1024px) 384px, 400px"
+        />
+      </div>
+      <div className="flex items-center justify-between px-2 pb-1 pt-4">
+        <div>
+          <p className="font-medium text-white">Jatin Goyal</p>
+          <p className="font-mono text-xs text-zinc-500">Senior AI Engineer · Javis</p>
+        </div>
+        <span className="pulse-dot h-2.5 w-2.5 rounded-full bg-emerald-400" aria-hidden="true" />
+      </div>
     </div>
-
-    <ul className="space-y-3 font-mono text-[13px] leading-relaxed">
-      {turns.map((line, i) => (
-        <li key={i} className="flex gap-3">
-          <span className={line.who === 'user' ? 'w-12 shrink-0 text-violet-300' : 'w-12 shrink-0 text-cyan-300'}>
-            {line.who}
-          </span>
-          <span className="text-zinc-300">{line.text}</span>
-        </li>
-      ))}
-    </ul>
-
-    <div className="mt-5 rounded-xl border border-white/[0.06] bg-ink-950/60 p-4 font-mono text-[12px] leading-relaxed">
-      <p className="text-zinc-500">{'// resolved from context, not re-asked'}</p>
-      <p>
-        <span className="text-zinc-500">ref </span>
-        <span className="text-amber-200">&quot;the second one&quot;</span>
-        <span className="text-zinc-500"> → </span>
-        <span className="text-cyan-200">po_number: 4533</span>
-      </p>
-      <p>
-        <span className="text-zinc-500">intent </span>
-        <span className="text-white">book_appointment</span>
-        <span className="text-zinc-500"> · slot </span>
-        <span className="text-white">Fri</span>
-      </p>
-      <p>
-        <span className="text-zinc-500">tier </span>
-        <span className="text-emerald-300">structural</span>
-        <span className="text-zinc-500"> · no LLM call</span>
-      </p>
-    </div>
-
-    <div className="mt-5 flex flex-wrap gap-2 border-t border-white/[0.06] pt-4">
-      {['context bundle', 'reference resolution', 'intents', 'commitments', 'memory'].map((step) => (
-        <span key={step} className="chip text-[11px]">{step}</span>
-      ))}
-    </div>
-    <p className="mt-3 font-mono text-[10px] uppercase tracking-widest text-zinc-600">Illustrative example</p>
   </div>
 );
 
@@ -82,9 +49,8 @@ const Hero = () => (
         </h1>
 
         <p className="rise mt-7 max-w-xl text-lg leading-relaxed text-zinc-400 md:text-xl [animation-delay:160ms]">
-          Hi, I&apos;m Jatin. At Javis I build the context and memory layer of an agentic AI platform, plus the
-          decision primitives agents use in real business workflows. Earlier at Javis I built real-time voice agents
-          and SIP telephony. Before that I spent three years on microservices and search at Enphase Energy.
+          Hi, I&apos;m Jatin, a Senior AI Engineer at Javis. I build AI agents that can follow long conversations,
+          keep track of what&apos;s been agreed, and make sound decisions in real business workflows.
         </p>
 
         <div className="rise mt-10 flex flex-wrap items-center gap-4 [animation-delay:240ms]">
@@ -110,7 +76,7 @@ const Hero = () => (
         </div>
       </div>
 
-      <ContextCard />
+      <Portrait />
     </div>
   </section>
 );

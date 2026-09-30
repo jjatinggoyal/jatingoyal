@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { ArrowUpRight, Github, Linkedin, Mail, Phone } from 'lucide-react';
 import { EMAIL, GITHUB, LINKEDIN, PHONE, PHONE_HREF, X } from './links';
 
@@ -30,17 +29,8 @@ const Contact = () => (
           Let&apos;s <span className="text-gradient">talk.</span>
         </h2>
         <p className="mt-5 max-w-md text-lg leading-relaxed text-zinc-400">
-          Want to talk about AI agents, context and memory, or real-time systems? Get in touch.
+          Want to talk about AI agents or anything else? Get in touch.
         </p>
-        <div className="mt-8 flex items-center gap-4">
-          <div className="relative h-14 w-14 overflow-hidden rounded-full border border-white/10">
-            <Image src="/images/profile.jpg" alt="Jatin Goyal" fill className="object-cover" sizes="56px" />
-          </div>
-          <div>
-            <p className="font-medium text-white">Jatin Goyal</p>
-            <p className="font-mono text-xs text-zinc-500">Senior AI Engineer · Javis</p>
-          </div>
-        </div>
       </div>
 
       <ul className="reveal card divide-y divide-white/[0.06] overflow-hidden">
