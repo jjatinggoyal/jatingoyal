@@ -8,7 +8,7 @@ const roles = [
     org: 'Javis Technologies',
     place: 'Bangalore, IN',
     current: true,
-    summary: 'Real-time voice AI agents, the SIP telephony stack behind them, and a context-memory layer for the agentic platform.',
+    summary: 'Context and memory layer, reference resolution and agent decision primitives for an agentic AI platform. Earlier: a real-time voice agent and the SIP telephony stack behind it.',
     link: { href: '#javis', label: 'See the work above' },
   },
   {

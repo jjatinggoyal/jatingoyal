@@ -3,8 +3,12 @@ import SectionHeading from './SectionHeading';
 
 const groups = [
   {
-    name: 'Voice & real-time',
+    name: 'Agents & LLM systems',
     featured: true,
+    items: ['Context & memory', 'Reference resolution', 'LLM tool-calling', 'Structured extraction', 'gRPC / Protobuf', 'DynamoDB'],
+  },
+  {
+    name: 'Voice & real-time',
     items: ['LiveKit', 'WebRTC', 'SIP', 'FreeSWITCH', 'OpenSIPS'],
   },
   {

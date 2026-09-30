@@ -30,7 +30,7 @@ const Contact = () => (
           Let&apos;s <span className="text-gradient">talk.</span>
         </h2>
         <p className="mt-5 max-w-md text-lg leading-relaxed text-zinc-400">
-          Want to talk about voice AI, real-time systems or telephony? Get in touch.
+          Want to talk about AI agents, context and memory, or real-time systems? Get in touch.
         </p>
         <div className="mt-8 flex items-center gap-4">
           <div className="relative h-14 w-14 overflow-hidden rounded-full border border-white/10">

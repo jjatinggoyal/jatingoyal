@@ -2,56 +2,58 @@ import React from 'react';
 import { ArrowDown, ArrowUpRight, MapPin } from 'lucide-react';
 import { RESUME } from './links';
 
-// Deterministic bar heights so the waveform renders the same on every build
-const bars = Array.from({ length: 36 }, (_, i) => {
-  const h = 0.35 + 0.65 * Math.abs(Math.sin(i * 1.7) * Math.cos(i * 0.45));
-  return { h: Math.round(h * 100), delay: ((i * 83) % 1200) / 1000 };
-});
-
-const transcript = [
-  { who: 'caller', text: 'Hi, mera order kab tak aayega?' },
-  { who: 'agent', text: 'Ek second, main check karta hoon…', tool: 'lookup_order()' },
-  { who: 'agent', text: 'Aapka order kal tak deliver ho jayega.' },
+const turns = [
+  { who: 'user', text: 'Status of PO 4521 and 4533?' },
+  { who: 'agent', text: 'PO 4521 is dispatched. PO 4533 is awaiting an appointment slot.' },
+  { who: 'user', text: 'Book the second one for Friday.' },
 ];
 
-const CallCard = () => (
+const ContextCard = () => (
   <div className="rise card relative overflow-hidden p-5 shadow-2xl shadow-cyan-500/10 [animation-delay:250ms]">
     <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent" />
 
     <div className="mb-5 flex items-center justify-between font-mono text-xs">
       <span className="flex items-center gap-2 text-emerald-300">
         <span className="pulse-dot h-2 w-2 rounded-full bg-emerald-400" />
-        live call · en / hi
+        turn 3 · context
       </span>
-      <span className="hidden text-zinc-500 sm:inline">sip → livekit → agent</span>
-    </div>
-
-    <div className="mb-6 flex h-20 items-center justify-between gap-[3px]" aria-hidden="true">
-      {bars.map((bar, i) => (
-        <span
-          key={i}
-          className="wave-bar w-full rounded-full bg-gradient-to-t from-cyan-400 to-violet-400"
-          style={{ height: `${bar.h}%`, animationDelay: `${bar.delay}s` }}
-        />
-      ))}
+      <span className="hidden text-zinc-500 sm:inline">fetch → resolve → decide → fold</span>
     </div>
 
     <ul className="space-y-3 font-mono text-[13px] leading-relaxed">
-      {transcript.map((line, i) => (
+      {turns.map((line, i) => (
         <li key={i} className="flex gap-3">
-          <span className={line.who === 'caller' ? 'w-12 shrink-0 text-violet-300' : 'w-12 shrink-0 text-cyan-300'}>
+          <span className={line.who === 'user' ? 'w-12 shrink-0 text-violet-300' : 'w-12 shrink-0 text-cyan-300'}>
             {line.who}
           </span>
-          <span className="text-zinc-300">
-            {line.tool && <span className="mr-2 rounded bg-white/[0.06] px-1.5 py-0.5 text-amber-200">{line.tool}</span>}
-            {line.text}
-          </span>
+          <span className="text-zinc-300">{line.text}</span>
         </li>
       ))}
     </ul>
 
+    <div className="mt-5 rounded-xl border border-white/[0.06] bg-ink-950/60 p-4 font-mono text-[12px] leading-relaxed">
+      <p className="text-zinc-500">{'// resolved from context, not re-asked'}</p>
+      <p>
+        <span className="text-zinc-500">ref </span>
+        <span className="text-amber-200">&quot;the second one&quot;</span>
+        <span className="text-zinc-500"> → </span>
+        <span className="text-cyan-200">po_number: 4533</span>
+      </p>
+      <p>
+        <span className="text-zinc-500">intent </span>
+        <span className="text-white">book_appointment</span>
+        <span className="text-zinc-500"> · slot </span>
+        <span className="text-white">Fri</span>
+      </p>
+      <p>
+        <span className="text-zinc-500">tier </span>
+        <span className="text-emerald-300">structural</span>
+        <span className="text-zinc-500"> · no LLM call</span>
+      </p>
+    </div>
+
     <div className="mt-5 flex flex-wrap gap-2 border-t border-white/[0.06] pt-4">
-      {['VAD', 'streaming STT', 'turn detection', 'intent', 'tool call', 'TTS'].map((step) => (
+      {['context bundle', 'reference resolution', 'intents', 'commitments', 'memory'].map((step) => (
         <span key={step} className="chip text-[11px]">{step}</span>
       ))}
     </div>
@@ -76,13 +78,13 @@ const Hero = () => (
         </a>
 
         <h1 className="rise font-display text-5xl font-semibold leading-[1.02] tracking-tight text-white md:text-7xl [animation-delay:80ms]">
-          I build voice AI that <span className="text-gradient">picks up the phone.</span>
+          I build AI agents that <span className="text-gradient">remember what you meant.</span>
         </h1>
 
         <p className="rise mt-7 max-w-xl text-lg leading-relaxed text-zinc-400 md:text-xl [animation-delay:160ms]">
-          Hi, I&apos;m Jatin. I build real-time voice agents that handle live customer calls in English and Hindi,
-          and the SIP telephony stack that connects them to the phone network. Before that I spent three years
-          on microservices and search at Enphase Energy.
+          Hi, I&apos;m Jatin. At Javis I build the context and memory layer of an agentic AI platform, plus the
+          decision primitives agents use in real business workflows. Earlier at Javis I built real-time voice agents
+          and SIP telephony. Before that I spent three years on microservices and search at Enphase Energy.
         </p>
 
         <div className="rise mt-10 flex flex-wrap items-center gap-4 [animation-delay:240ms]">
@@ -108,7 +110,7 @@ const Hero = () => (
         </div>
       </div>
 
-      <CallCard />
+      <ContextCard />
     </div>
   </section>
 );

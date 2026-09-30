@@ -7,7 +7,7 @@ const display = Space_Grotesk({ subsets: ['latin'], variable: '--font-display' }
 const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' });
 
 const description =
-  'Jatin Goyal — Senior AI Engineer at Javis Technologies, building real-time voice AI agents and the SIP telephony stack behind them.';
+  'Jatin Goyal — Senior AI Engineer at Javis Technologies, building the context and memory layer and decision primitives of an agentic AI platform.';
 
 export const metadata = {
   title: 'Jatin Goyal — Senior AI Engineer',
